@@ -36,6 +36,19 @@ button{font:inherit;color:var(--btn-ink);cursor:pointer}
 button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 [hidden]{display:none!important}
 .tabs .gear{margin-left:auto;font-family:inherit;font-size:22px}
+.card{border:1px solid var(--line);background:var(--btn);border-radius:14px;padding:4px 14px 12px;margin-top:14px}
+.card .ah{margin:12px 0 8px}
+.pform{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px}
+.pform label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+.pform input{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:160px}
+.rhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.rank{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.rank li{display:flex;gap:10px;align-items:baseline;padding:6px 8px;border-radius:8px}
+.rank li:nth-child(odd){background:var(--bg)}
+.rank li.me{outline:2px solid var(--accent)}
+.rank .pos{font-family:"Gochi Hand",cursive;font-size:20px;width:1.6em;text-align:center}
+.rank .nm{flex:1;font-weight:700}.rank .gr{color:var(--muted);font-size:13px;font-weight:400}
+.rank .sc{color:var(--muted);font-size:13px;white-space:nowrap}
 .locked .lk,.lk.locked{pointer-events:none;opacity:.45}
 .pathbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:12px;padding:10px 12px;border:2px solid var(--accent);border-radius:12px;background:var(--btn)}
 .pathbar b{font-weight:700}.pathbar .dots{letter-spacing:3px;color:var(--accent)}.pathbar .spacer{flex:1}
@@ -189,16 +202,38 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
     <button data-sec="p" data-i="secP"></button>
     <button data-sec="r" data-i="secR"></button>
     <button data-sec="m" data-i="secM"></button>
-    <button data-sec="a" aria-label="Admin" class="gear">⚙</button>
+    <button data-sec="a" aria-label="Admin" class="gear" id="gearTab" hidden>⚙</button>
   </nav>
   <!-- ================= CAMIÑO ================= -->
   <section id="secP" hidden>
+    <div class="card" id="profCard">
+      <h2 class="ah" data-i="profile"></h2>
+      <div class="pform">
+        <label><span data-i="nick"></span><input id="pNick" maxlength="20" autocomplete="off"></label>
+        <label><span data-i="grupo"></span><input id="pGrupo" maxlength="20" autocomplete="off" style="text-transform:uppercase"></label>
+        <button class="btn primary" id="pSave"><span data-i="saveP"></span></button>
+      </div>
+      <p class="mhint" data-i="nickHint"></p>
+      <p class="fb" id="pMsg"></p>
+    </div>
+    <div class="card">
+      <div class="rhead"><h2 class="ah" data-i="ranking"></h2><div class="seg" id="rkScope"><button data-v="g" data-i="myGroup"></button><button data-v="all" data-i="all"></button></div></div>
+      <ol class="rank" id="rkList"></ol>
+    </div>
     <p class="mhint" id="pathIntro"></p>
     <ol class="path" id="pathList"></ol>
   </section>
   <!-- ================= ADMIN ================= -->
   <section id="secA" hidden>
     <p class="mhint" data-i="admNote"></p>
+    <div class="card">
+      <div class="pform">
+        <label><span>PIN</span><input id="admPin" type="password" inputmode="numeric" autocomplete="off"></label>
+        <button class="btn primary" id="admSrv"><span data-i="admServer"></span></button>
+        <button class="btn" id="admPl"><span data-i="admPlayers"></span></button>
+      </div>
+      <ul class="alist" id="admPlayers" style="margin-top:10px"></ul>
+    </div>
     <h2 class="ah" data-i="admCells"></h2>
     <ul class="alist" id="admCells"></ul>
     <h2 class="ah" data-i="admPath"></h2>
@@ -441,7 +476,7 @@ function draw(svg,p,opt={}){
 }
 function render(){draw($("main"),S.user,{marks:S.checked?cmp(S.user,S.target):null})}
 function cmp(u,g){return u.k.map((k,i)=>k===g.k[i]&&(i===0||u.t[i-1]===g.t[i-1])&&(i===7||u.t[i]===g.t[i]))}
-function scoreUp(key,ok,pass){const c=S.sc[key];c.t++;if(ok){c.s++;c.k++}else c.k=0;updScore();pathHit(key,pass===undefined?ok:pass)}
+function scoreUp(key,ok,pass){const c=S.sc[key];c.t++;if(ok){c.s++;c.k++}else c.k=0;updScore();pathHit(key,pass===undefined?ok:pass);totHit(ok)}
 function updScore(){$("sc").textContent=S.sc.r.s+"/"+S.sc.r.t;$("sk").textContent=S.sc.r.k;$("isc").textContent=S.sc.rid.s+"/"+S.sc.rid.t;$("isk").textContent=S.sc.rid.k;const m=S.sc[M.mode];$("msc").textContent=m.s+"/"+m.t;$("msk").textContent=m.k}
 function check(){
   const ok=cmp(S.user,S.target).every(Boolean);S.checked=true;
@@ -894,11 +929,65 @@ $("admPath").onclick=e=>{const el=e.target.closest("[data-a]");if(!el)return;con
   if(a==="up")move(CFG.path,i,-1);else if(a==="dn")move(CFG.path,i,1);else if(a==="del"&&CFG.path.length>1)CFG.path.splice(i,1);
   saveCfg();renderAdmin()};
 $("admReset").onclick=()=>{CFG=cfgDefault();saveCfg();renderAdmin();admMsg("admDone")};
-$("admProg").onclick=()=>{P.prog={};store.set("pathProg",P.prog);admMsg("admDone")};
+$("admProg").onclick=()=>{P.prog={};store.set("pathProg",P.prog);queueSync();admMsg("admDone")};
 $("admExport").onclick=()=>{const txt=JSON.stringify(CFG);
   (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>admMsg("admCopied")).catch(()=>{$("admImportBox").hidden=false;$("admText").value=txt;$("admText").select()})};
 $("admImportBtn").onclick=()=>{$("admImportBox").hidden=!$("admImportBox").hidden};
 $("admApply").onclick=()=>{try{const c=JSON.parse($("admText").value);if(!validCfg(c))throw 0;CFG=c;saveCfg();renderAdmin();admMsg("admDone")}catch(e){admMsg("admBad")}};
+
+/* ================= SERVIDOR (Supabase · cousas · ofino_) ================= */
+Object.assign(STR.gl,{profile:"O teu perfil",nick:"Alcume",grupo:"Grupo",nickHint:"Non poñas o teu nome real: usa un alcume. O grupo dácho o teu profe.",saveP:"Gardar",ranking:"Clasificación",myGroup:"O meu grupo",all:"Xeral",noRank:"Aínda non hai ninguén.",offline:"Sen conexión co servidor.",stagesS:"etapas",hitsS:"acertos",saved:"Gardado.",nickShort:"O alcume ten que ter polo menos 2 letras.",admServer:"Gardar no servidor",admPlayers:"Alumnado",admPinBad:"PIN incorrecto.",sure:"Seguro?",admNote:"O orde e o itinerario gárdanse neste navegador. Co PIN podes gardalos no servidor para que lle cheguen a todo o alumnado."});
+Object.assign(STR.es,{profile:"Tu perfil",nick:"Alias",grupo:"Grupo",nickHint:"No pongas tu nombre real: usa un alias. El grupo te lo da tu profe.",saveP:"Guardar",ranking:"Clasificación",myGroup:"Mi grupo",all:"General",noRank:"Todavía no hay nadie.",offline:"Sin conexión con el servidor.",stagesS:"etapas",hitsS:"aciertos",saved:"Guardado.",nickShort:"El alias tiene que tener al menos 2 letras.",admServer:"Guardar en el servidor",admPlayers:"Alumnado",admPinBad:"PIN incorrecto.",sure:"¿Seguro?",admNote:"El orden y el itinerario se guardan en este navegador. Con el PIN puedes guardarlos en el servidor para que le lleguen a todo el alumnado."});
+Object.assign(STR.ca,{profile:"El teu perfil",nick:"Àlies",grupo:"Grup",nickHint:"No posis el teu nom real: fes servir un àlies. El grup te’l dona el teu professor.",saveP:"Desar",ranking:"Classificació",myGroup:"El meu grup",all:"General",noRank:"Encara no hi ha ningú.",offline:"Sense connexió amb el servidor.",stagesS:"etapes",hitsS:"encerts",saved:"Desat.",nickShort:"L’àlies ha de tenir almenys 2 lletres.",admServer:"Desar al servidor",admPlayers:"Alumnat",admPinBad:"PIN incorrecte.",sure:"Segur?",admNote:"L’ordre i l’itinerari es desen en aquest navegador. Amb el PIN els pots desar al servidor perquè arribin a tot l’alumnat."});
+Object.assign(STR.eu,{profile:"Zure profila",nick:"Ezizena",grupo:"Taldea",nickHint:"Ez jarri zure benetako izena: erabili ezizen bat. Taldea irakasleak emango dizu.",saveP:"Gorde",ranking:"Sailkapena",myGroup:"Nire taldea",all:"Orokorra",noRank:"Oraindik ez dago inor.",offline:"Zerbitzariarekin konexiorik gabe.",stagesS:"etapa",hitsS:"asmatze",saved:"Gordeta.",nickShort:"Ezizenak gutxienez 2 letra izan behar ditu.",admServer:"Zerbitzarian gorde",admPlayers:"Ikasleak",admPinBad:"PIN okerra.",sure:"Ziur?",admNote:"Ordena eta ibilbidea nabigatzaile honetan gordetzen dira. PINarekin zerbitzarian gorde ditzakezu ikasle guztiei irits dakien."});
+const SB_URL="https://ofupwqrzbtzykvnyocue.supabase.co",SB_KEY="sb_publishable_bGQqNOI6ibX5yk_5ll8C9A_QYqknqLZ";
+async function rpc(fn,args){
+  const r=await fetch(`${SB_URL}/rest/v1/rpc/${fn}`,{method:"POST",headers:{"apikey":SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(args||{})});
+  if(!r.ok)throw new Error(r.status);const txt=await r.text();return txt?JSON.parse(txt):null}
+const rhex=n=>Array.from(crypto.getRandomValues(new Uint8Array(n)),b=>b.toString(16).padStart(2,"0")).join("");
+let PL=store.get("player",null);
+if(!PL||!PL.id){PL={id:(crypto.randomUUID?crypto.randomUUID():rhex(4)+"-"+rhex(2)+"-4"+rhex(2).slice(1)+"-a"+rhex(2).slice(1)+"-"+rhex(6)),token:rhex(24),nick:"",grupo:""};store.set("player",PL)}
+const TOT=store.get("tot",{h:0,t:0,b:0});
+function totHit(ok){TOT.t++;if(ok)TOT.h++;TOT.b=Math.max(TOT.b,...Object.values(S.sc).map(c=>c.k));store.set("tot",TOT);queueSync()}
+const stagesDone=()=>CFG.path.filter((s,i)=>doneOf(i)).length;
+let syncT=null;
+function queueSync(){clearTimeout(syncT);syncT=setTimeout(syncNow,1500)}
+async function syncNow(){
+  if(!PL.nick||PL.nick.length<2)return false;
+  try{return await rpc("ofino_save",{p_id:PL.id,p_token:PL.token,p_nick:PL.nick,p_grupo:PL.grupo,p_stages:stagesDone(),p_hits:TOT.h,p_tries:TOT.t,p_best:TOT.b,p_progress:P.prog})}
+  catch(e){return false}}
+let rkScope=store.get("rkScope","g");
+async function renderRank(){
+  segSet("rkScope",rkScope);const L=$("rkList");
+  const g=rkScope==="g"?PL.grupo:"";
+  try{const rows=await rpc("ofino_ranking",{p_grupo:g,p_limit:20})||[];
+    L.innerHTML=rows.length?rows.map((r,i)=>{const me=r.nick===PL.nick&&r.grupo===PL.grupo;
+      return `<li class="${me?"me":""}"><span class="pos">${i+1}</span><span class="nm">${esc(r.nick)} <span class="gr">${esc(r.grupo)}</span></span><span class="sc">${r.stages} ${t().stagesS} · ${r.hits} ${t().hitsS}</span></li>`}).join(""):`<li>${t().noRank}</li>`}
+  catch(e){L.innerHTML=`<li>${t().offline}</li>`}}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+function fillProfile(){$("pNick").value=PL.nick||"";$("pGrupo").value=PL.grupo||""}
+$("pSave").onclick=async()=>{
+  const n=$("pNick").value.trim().slice(0,20),g=$("pGrupo").value.trim().toUpperCase().slice(0,20);
+  if(n.length<2){$("pMsg").textContent=t().nickShort;return}
+  PL.nick=n;PL.grupo=g;store.set("player",PL);
+  const ok=await syncNow();$("pMsg").textContent=ok?t().saved:t().offline;$("pMsg").className="fb"+(ok?" ok":"");renderRank()};
+$("rkScope").onclick=e=>{const b=e.target.closest("button");if(!b)return;rkScope=b.dataset.v;store.set("rkScope",rkScope);renderRank()};
+/* configuración do servidor */
+async function loadServerCfg(){
+  try{const c=await rpc("ofino_get_config");if(validCfg(c)){CFG=c;CELL_ORDER.forEach(id=>{if(!CFG.cells.find(x=>x.id===id))CFG.cells.push({id,on:true})});saveCfg();
+    if(!$("ridBox").hidden)newId();if(!$("secP").hidden)renderPath();if(!$("secA").hidden)renderAdmin()}}catch(e){}}
+$("admSrv").onclick=async()=>{try{const ok=await rpc("ofino_set_config",{p_pin:$("admPin").value,p_data:CFG});admMsg(ok?"saved":"admPinBad")}catch(e){admMsg("offline")}};
+async function renderPlayers(){
+  try{const rows=await rpc("ofino_admin_players",{p_pin:$("admPin").value})||[];
+    if(!rows.length){$("admPlayers").innerHTML=`<li>${t().noRank} / ${t().admPinBad}</li>`;return}
+    $("admPlayers").innerHTML=rows.map(r=>`<li><span class="lab"><b>${esc(r.nick)}</b> · ${esc(r.grupo)} · ${r.stages} ${t().stagesS} · ${r.hits} ${t().hitsS}</span><button data-del="${r.id}" aria-label="✕">✕</button></li>`).join("")}
+  catch(e){$("admPlayers").innerHTML=`<li>${t().offline}</li>`}}
+$("admPl").onclick=renderPlayers;
+$("admPlayers").onclick=async e=>{const b=e.target.closest("[data-del]");if(!b)return;
+  if(!b.dataset.armed){b.dataset.armed="1";b.textContent=t().sure;return}
+  try{await rpc("ofino_admin_delete",{p_pin:$("admPin").value,p_id:b.dataset.del})}catch(e){}renderPlayers()};
+function checkAdminHash(){if(location.hash==="#admin")$("gearTab").hidden=false}
+window.addEventListener("hashchange",checkAdminHash);
 
 /* ================= XERAL ================= */
 function applyLang(){
@@ -914,7 +1003,7 @@ function applyLang(){
 }
 function setSec(s,keep){stopAll();if(!keep&&P.active!==null)exitPath(true);S.sec=s;store.set("sec",s);segSetTabs();
   ["p","r","m","a"].forEach(x=>$("sec"+x.toUpperCase()).hidden=s!==x);
-  if(s==="p")renderPath();if(s==="a")renderAdmin()}
+  if(s==="p"){renderPath();fillProfile();renderRank()}if(s==="a")renderAdmin()}
 function segSetTabs(){document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.sec===S.sec)))}
 $("tabs").onclick=e=>{const b=e.target.closest("button");if(b)setSec(b.dataset.sec)};
 $("langCur").onclick=e=>{e.stopPropagation();$("lang").classList.toggle("open")};
@@ -938,9 +1027,10 @@ segSet("mcount",M.count);segSet("mheads",M.heads);
 setLevel([1,2,3,4].includes(S.level)?S.level:1);
 if(!(M.level>=1&&M.level<=8))M.level=1;$("mlv").value=M.level;buildKeys();
 setMMode(M.mode==="live"?"live":"mem");
-{const al0=applyLang;applyLang=function(){al0();if(!$("ridBox").hidden)renderId();if(!$("secP").hidden)renderPath();if(!$("secA").hidden)renderAdmin();pathBar()}}
+{const al0=applyLang;applyLang=function(){al0();if(!$("ridBox").hidden)renderId();if(!$("secP").hidden)renderPath();if(!$("secA").hidden)renderAdmin();if(!$("secP").hidden)renderRank();pathBar()}}
+checkAdminHash();loadServerCfg();
 S.rmode=store.get("rmode","pre");setRMode(S.rmode==="id"?"id":"pre");
-setSec(["p","r","m"].includes(S.sec)?S.sec:"r");
+setSec(["p","r","m"].includes(S.sec)?S.sec:"r");if(location.hash==="#admin")setSec("a");
 applyLang();
 </script>
 </body>
