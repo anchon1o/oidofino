@@ -73,10 +73,22 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
 .opts4 button.ok{border-color:var(--chalk-g);background:rgba(168,230,161,.12)}.opts4 button.bad{border-color:var(--chalk-p);background:rgba(245,154,176,.12)}
 .opts4 button.pl{border-color:var(--chalk-y)}
 .opts4 .tag{position:absolute;top:4px;left:8px;font-family:"Gochi Hand",cursive;color:var(--chalk);opacity:.6;font-size:18px}
-.nl{stroke:var(--chalk);stroke-width:2;opacity:.55}.nh,.nrest{fill:var(--chalk)}.nst{stroke:var(--chalk);stroke-width:2.6}
-.nbm{stroke:var(--chalk);stroke-width:6}.nfl{stroke:var(--chalk);stroke-width:3;fill:none;stroke-linecap:round}
+.nl{stroke:var(--chalk);stroke-width:2;opacity:.55}.nh,.nrest{fill:var(--chalk)}.nst{stroke:var(--chalk);stroke-width:1.9}
+.nbm{stroke:var(--chalk);stroke-width:4.6}.nfl{stroke:var(--chalk);stroke-width:2.4;fill:none;stroke-linecap:round}
 @media (max-width:560px){.opts4{grid-template-columns:1fr}}
+.barplay{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;font-size:14px;color:var(--muted)}
+.barplay button{border:1px solid var(--line);background:var(--btn);border-radius:999px;padding:5px 12px;font-size:14px}
+.palette{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.palette button{background:var(--board);border:4px solid var(--wood);border-radius:10px;padding:2px 4px;cursor:pointer}
+.palette button svg{height:52px;width:auto;display:block}
+.palette button:disabled{opacity:.3;cursor:default}
+.palette button:active:not(:disabled){transform:translateY(1px)}
+.cg.bad .nh,.cg.bad .nrest{fill:var(--chalk-p)}.cg.bad .nst,.cg.bad .nbm,.cg.bad .nfl{stroke:var(--chalk-p)}
+.cg.ok .nh,.cg.ok .nrest{fill:var(--chalk-g)}.cg.ok .nst,.cg.ok .nbm,.cg.ok .nfl{stroke:var(--chalk-g)}
+.cg .hit{fill:transparent;cursor:pointer}.slotbox{cursor:pointer;pointer-events:all}.slotbox.cur{stroke:var(--chalk-y);stroke-opacity:1;stroke-dasharray:none;stroke-width:3;fill:rgba(246,215,90,.1)}.tsig{fill:var(--chalk);font:700 26px Georgia,"Times New Roman",serif;text-anchor:middle}.slotbox{fill:none;stroke:var(--chalk);stroke-opacity:.3;stroke-width:2;stroke-dasharray:5 5}
 .lang{position:relative}
+header .snd{margin-left:auto;font-size:15px;color:var(--muted);display:flex;align-items:center;gap:4px}
+header .snd select{font:inherit;color:var(--ink);background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
 .lang .cur{border:1px solid var(--line);background:var(--btn);border-radius:8px;padding:7px;display:flex}
 .lang .menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--btn);border:1px solid var(--line);border-radius:10px;padding:6px;display:none;flex-direction:column;gap:4px;z-index:5}
 .lang.open .menu{display:flex}
@@ -140,6 +152,7 @@ svg.sb{display:block;width:100%;height:auto;touch-action:none;user-select:none;-
 .fb.ok{color:var(--accent)}
 .solbox{margin-top:12px}
 .solbox h2{font-size:15px;color:var(--muted);margin:0 0 6px;font-weight:700}
+.ver{margin:28px 0 0;text-align:center;font-size:13px;color:var(--muted)}.ver b{color:var(--ink)}
 .hints{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:15px}
 .hints li{display:flex;align-items:center;gap:8px}
 .sw{width:22px;height:6px;border-radius:3px;background:var(--muted);flex:none}
@@ -166,13 +179,14 @@ svg.sb{display:block;width:100%;height:auto;touch-action:none;user-select:none;-
 .lvl b{font-family:"Gochi Hand",cursive;font-weight:400;font-size:28px;color:var(--ink);width:1.2ch;text-align:center}.lvl b.dim{opacity:.35}
 .lvl input{width:150px;accent-color:var(--accent)}
 svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-radius:8px;border:4px solid var(--wood)}
-.sname{fill:var(--chalk);font-size:11px;text-anchor:middle;font-family:"Atkinson Hyperlegible",sans-serif}
+.sname{fill:var(--chalk);font-size:10px;text-anchor:middle;font-family:"Atkinson Hyperlegible",sans-serif}
 .unused{opacity:.22}
 .clefp{fill:var(--chalk)}
 .acc{fill:var(--chalk)}.nt.ref .acc{fill:var(--chalk-y)}.nt.ok .acc{fill:var(--chalk-g)}.nt.bad .acc,.nt.ghost.no .acc{fill:var(--chalk-p)}.nt.ghost .acc{fill:var(--chalk-y)}
 #scale{cursor:pointer;touch-action:manipulation}.scwrap{display:flex;flex-direction:column;gap:4px}.sccap{font-size:13px;color:var(--muted);min-height:1.45em}.sccap.on{color:var(--ink);font-weight:700}
 .keyrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 0}.klab{color:var(--muted);font-size:15px}
-.keys{display:flex;flex-wrap:wrap;gap:6px}.keys button{border:1px solid var(--line);background:var(--btn);border-radius:999px;padding:5px 12px;font-size:15px}
+.keys{display:flex;flex-wrap:wrap;gap:6px 10px}.keys .kg{display:inline-flex;align-items:center;gap:4px}.keys .kg i{font-style:normal;font-size:13px;color:var(--muted);min-width:1.8em;text-align:right}
+.kname{fill:var(--chalk-y);font:700 13px "Atkinson Hyperlegible",sans-serif}.keys button{border:1px solid var(--line);background:var(--btn);border-radius:999px;padding:5px 12px;font-size:15px}
 .keys button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .keyrow .sccap{flex-basis:100%}
 .lvl .cust{font-size:15px;color:var(--ink);font-weight:700}
@@ -193,6 +207,7 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
 <div class="wrap">
   <header>
     <h1 data-i="app"></h1>
+    <label class="snd">🔊 <select id="timbre"><option value="piano" data-i="tPiano"></option><option value="marimba" data-i="tMarimba"></option><option value="frauta" data-i="tFrauta"></option></select></label>
     <div class="lang" id="lang">
       <button class="cur" id="langCur" aria-haspopup="true" aria-label="Idioma"></button>
       <div class="menu" id="langMenu"></div>
@@ -236,6 +251,8 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
     </div>
     <h2 class="ah" data-i="admCells"></h2>
     <ul class="alist" id="admCells"></ul>
+    <h2 class="ah" data-i="admCCells"></h2>
+    <ul class="alist" id="admCCells"></ul>
     <h2 class="ah" data-i="admPath"></h2>
     <ul class="alist" id="admPath"></ul>
     <div class="row">
@@ -256,7 +273,7 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
   <!-- ================= RITMO ================= -->
   <section id="secR">
     <div class="pathbar" id="pbarR" hidden></div>
-    <div class="row" style="margin-top:12px"><div class="seg lk" id="rmode"><button data-v="pre" data-i="rPre"></button><button data-v="id" data-i="rId"></button></div></div>
+    <div class="row" style="margin-top:12px"><div class="seg lk" id="rmode"><button data-v="pre" data-i="rPre"></button><button data-v="id" data-i="rId"></button><button data-v="build" data-i="rBuild"></button><button data-v="err" data-i="rErr"></button></div></div>
     <div id="rpreBox">
     <div class="score"><span><span data-i="score"></span> <b id="sc">0/0</b></span><span><span data-i="streak"></span> <b id="sk">0</b></span></div>
     <div class="levels r lk" id="levels">
@@ -290,10 +307,44 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
     </div>
     <ul class="hints" id="hints"></ul>
   </div>
+    <div id="rbBox" hidden>
+      <div class="score"><span><span data-i="score"></span> <b id="bsc">0/0</b></span><span><span data-i="streak"></span> <b id="bsk">0</b></span></div>
+      <div class="opts lk" id="rbSet" style="margin-top:14px">
+        <label class="lvl"><span data-i="cellsL"></span> <b id="rbOut">2</b><input type="range" id="rbN" min="2" max="15" step="1"></label>
+        <label id="rErrShowWrap"><span data-i="showL"></span> <span class="seg" id="rerrShow"><button data-v="0" data-i="showBefore"></button><button data-v="1" data-i="showAfter"></button></span></label>
+        <label><span data-i="meterL"></span> <span class="seg" id="rbM"><button data-v="2/4">2/4</button><button data-v="3/4">3/4</button><button data-v="4/4">4/4</button><button data-v="6/8">6/8</button><button data-v="9/8">9/8</button><button data-v="12/8">12/8</button></span></label>
+        <label><span data-i="barsL"></span> <span class="seg" id="rbBars"><button data-v="1">1</button><button data-v="2">2</button><button data-v="4">4</button></span></label>
+      </div>
+      <div class="frame"><div class="board">
+        <div class="status" id="bstatus"></div>
+        <svg class="sb" id="bseq" viewBox="0 0 400 84" style="touch-action:manipulation"></svg>
+      </div></div>
+      <div class="barplay" id="bbars"></div>
+      <div class="palette" id="bpal"></div>
+      <div class="row">
+        <button class="btn primary big" id="bplay">▶ <span data-i="play"></span></button>
+        <button class="btn" id="bmine"><span data-i="mine"></span></button>
+        <label class="tempo"><span data-i="tempo"></span> <input type="range" id="bbpm" min="50" max="120" step="5"><output id="bbpmOut"></output></label>
+      </div>
+      <div class="row">
+        <button class="btn" id="bclear"><span data-i="clear"></span></button>
+        <span class="spacer"></span>
+        <button class="btn" id="bshow" hidden><span data-i="sol"></span></button>
+        <button class="btn primary" id="bcheck"><span data-i="check"></span></button>
+        <button class="btn" id="bnext"><span data-i="next"></span></button>
+      </div>
+      <p class="fb" id="bfb" aria-live="polite"></p>
+      <div class="solbox" id="bsolbox" hidden>
+        <h2 data-i="solTitle"></h2>
+        <div class="frame"><div class="board"><svg class="sb" id="bsol" viewBox="0 0 400 84"></svg></div></div>
+      </div>
+    </div>
     <div id="ridBox" hidden>
       <div class="score"><span><span data-i="score"></span> <b id="isc">0/0</b></span><span><span data-i="streak"></span> <b id="isk">0</b></span></div>
       <div class="lvrow lk" id="ridSet">
         <label class="lvl"><span data-i="cellsL"></span> <b id="ridOut">2</b><input type="range" id="ridN" min="2" max="15" step="1"></label>
+        <label><span data-i="subdL"></span> <span class="seg" id="ridTer"><button data-v="0" data-i="binS"></button><button data-v="1" data-i="terS"></button></span></label>
+        <label><span data-i="optsL"></span> <span class="seg" id="ridOptN"><button data-v="4">4</button><button data-v="6">6</button><button data-v="8">8</button></span></label>
         <div class="chips" id="ridChips"></div>
       </div>
       <div class="frame"><div class="board">
@@ -314,7 +365,7 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
   <section id="secM" hidden>
     <div class="pathbar" id="pbarM" hidden></div>
     <div class="row" style="margin-top:12px">
-      <div class="seg lk" id="mmode"><button data-v="mem" data-i="modeMem"></button><button data-v="live" data-i="modeLive"></button></div>
+      <div class="seg lk" id="mmode"><button data-v="mem" data-i="modeMem"></button><button data-v="live" data-i="modeLive"></button><button data-v="err" data-i="modeErr"></button></div>
     </div>
     <div class="score"><span><span data-i="score"></span> <b id="msc">0/0</b></span><span><span data-i="streak"></span> <b id="msk">0</b></span></div>
     <div class="keyrow lk">
@@ -324,10 +375,12 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
     </div>
     <div class="lvrow lk">
       <label class="lvl"><span data-i="level"></span> <b id="mlvOut">1</b><input type="range" id="mlv" min="1" max="8" step="1"></label>
-      <div class="scwrap"><svg class="scale" id="scale" viewBox="0 0 420 112"></svg><span class="sccap" id="sccap"></span></div>
+      <div class="scwrap"><svg class="scale" id="scale" viewBox="0 0 420 120"></svg><span class="sccap" id="sccap"></span></div>
     </div>
     <div class="opts">
       <label class="tempo"><span data-i="tempo"></span> <input type="range" id="mbpm" min="30" max="120" step="5"><output id="mbpmOut"></output></label>
+      <label id="errShowWrap" class="lk"><span data-i="showL"></span> <span class="seg" id="merrShow"><button data-v="0" data-i="showBefore"></button><button data-v="1" data-i="showAfter"></button></span></label>
+      <label id="errLenWrap" class="lk"><span data-i="sounds"></span> <span class="seg" id="merrLen"><button data-v="8">8</button><button data-v="12">12</button><button data-v="16">16</button></span></label>
       <label id="countWrap" class="lk"><span data-i="sounds"></span> <span class="seg" id="mcount"><button data-v="5">5</button><button data-v="6">6</button><button data-v="7">7</button></span></label>
       <label><span data-i="heads"></span> <span class="seg" id="mheads"><button data-v="w" data-i="hW"></button><button data-v="q" data-i="hQ"></button></span></label>
     </div>
@@ -360,9 +413,11 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
       <div class="frame"><div class="board"><svg class="sb" id="msol" viewBox="0 0 800 172"></svg></div></div>
     </div>
   </section>
+  <footer class="ver">Oído Fino · versión <b id="appVer">1.19 · 23/11/2026</b> · by ancho</footer>
 </div>
 
 <script>
+const APP_VERSION="1.19 · 23/11/2026";
 const STR={
  gl:{app:"Oído Fino",secR:"Ritmo",secM:"Melodía",lv1:"Negras e silencios",lv2:"Con brancas",lv3:"Con corcheas",lv4:"Todo xunto",play:"Escoitar",mine:"Escoitar a miña",tempo:"Tempo",pulse:"Marcar o pulso",clear:"Borrar todo",check:"Comprobar",next:"Novo exercicio",sol:"Ver solución",solTitle:"Solución",ok:"Ben feito!",bad:"Case! Revisa os palitos marcados en rosa.",hScratch:"Risca un palito dun lado ao outro: silencio",hTie:"Arrastra dun palito ao seguinte: branca",hTap:"Toca un palito: dúas corcheas",hUndo:"Repite o xesto para desfacelo",score:"Acertos",streak:"Racha",ready:"Escoita e marca o que oes",listening:"Escoitando…",
   modeMem:"De memoria",modeLive:"Ao momento",sounds:"Sons",heads:"Cabezas",hW:"Redondas",hQ:"Negras",input:"Escribir con",inBtn:"Botóns",inKb:"Teclado",inSt:"Pentagrama",undo:"Borrar a última",melReady:"Preme Escoitar para comezar",refPlay:"Nota de referencia…",memWait:"Escoita sen escribir…",memWrite:"Agora escribe o que lembras",liveGo:"Escribe mentres soa",liveEnd:"Remata e comproba",partial:"{a} de {b} correctas. Revisa as rosas."},
@@ -387,7 +442,7 @@ const fmt=(s,o)=>s.replace(/\{(\w)\}/g,(_,k)=>o[k]);
 
 const S={lang:store.get("lang","gl"),sec:store.get("sec","r"),level:store.get("level",1),bpm:store.get("bpm",80),pulse:store.get("pulse",true),
  target:null,user:null,checked:false,counted:false,
- sc:{r:{s:0,t:0,k:0},rid:{s:0,t:0,k:0},mem:{s:0,t:0,k:0},live:{s:0,t:0,k:0}}};
+ sc:{r:{s:0,t:0,k:0},rid:{s:0,t:0,k:0},rb:{s:0,t:0,k:0},re:{s:0,t:0,k:0},err:{s:0,t:0,k:0},mem:{s:0,t:0,k:0},live:{s:0,t:0,k:0}}};
 if(!STR[S.lang])S.lang="gl";
 const t=()=>STR[S.lang];
 const chalkDefs=id=>`<defs><filter id="ch-${id}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5"/></filter></defs>`;
@@ -401,18 +456,31 @@ Object.assign(STR.gl,{custom:"Personalizado",custHint:"Toca as notas para person
 Object.assign(STR.es,{custom:"Personalizado",custHint:"Toca las notas para personalizar"});
 Object.assign(STR.ca,{custom:"Personalitzat",custHint:"Toca les notes per personalitzar"});
 Object.assign(STR.eu,{custom:"Pertsonalizatua",custHint:"Ukitu notak pertsonalizatzeko"});
+Object.assign(STR.gl,{tPiano:"Piano",tMarimba:"Marimba",tFrauta:"Frauta"});
+Object.assign(STR.es,{tPiano:"Piano",tMarimba:"Marimba",tFrauta:"Flauta"});
+Object.assign(STR.ca,{tPiano:"Piano",tMarimba:"Marimba",tFrauta:"Flauta"});
+Object.assign(STR.eu,{tPiano:"Pianoa",tMarimba:"Marinba",tFrauta:"Txirula"});
+S.timbre=store.get("timbre","piano");
 /* ================= SON ================= */
 let ctx=null,playing=null;
 function ac(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();return ctx}
-function click(tm,v){const c=ac(),o=c.createOscillator(),g=c.createGain();o.type="square";o.frequency.value=v>=1?1760:1320;
-  g.gain.setValueAtTime(0,tm);g.gain.linearRampToValueAtTime(.1*v,tm+.002);g.gain.exponentialRampToValueAtTime(.0001,tm+.04);
-  o.connect(g).connect(c.destination);o.start(tm);o.stop(tm+.05);return[o]}
-function tone(tm,dur,freq=523.25){const c=ac(),o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain(),g2=c.createGain();
-  o.type="triangle";o.frequency.value=freq;o2.type="sine";o2.frequency.value=freq*2;g2.gain.value=.22;
-  o.connect(g);o2.connect(g2).connect(g);g.connect(c.destination);
-  const v=.32;g.gain.setValueAtTime(0,tm);g.gain.linearRampToValueAtTime(v,tm+.01);g.gain.exponentialRampToValueAtTime(v*.55,tm+.14);
-  g.gain.setValueAtTime(v*.55,Math.max(tm+.15,tm+dur-.05));g.gain.linearRampToValueAtTime(0,tm+dur);
-  o.start(tm);o2.start(tm);o.stop(tm+dur+.03);o2.stop(tm+dur+.03);return[o,o2]}
+let master=null;
+function out(){const c=ac();if(!master){const comp=c.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=4;master=c.createGain();master.gain.value=.9;master.connect(comp).connect(c.destination)}return master}
+function click(tm,v){const c=ac(),o=c.createOscillator(),g=c.createGain();o.type="sine";o.frequency.value=v>=1?1568:1175;
+  const pk=.22*v;g.gain.setValueAtTime(0,tm);g.gain.linearRampToValueAtTime(pk,tm+.002);g.gain.setTargetAtTime(0,tm+.004,.012);
+  o.connect(g).connect(out());o.start(tm);o.stop(tm+.1);return[o]}
+const TIMB={
+  piano:{p:[[1,1],[2,.42],[3,.18],[4,.08],[5,.04]],att:.004,dec:.35,sus:.22,rel:.06,vol:.42},
+  marimba:{p:[[1,1],[3.93,.18],[9.2,.04]],att:.003,dec:.16,sus:.05,rel:.05,vol:.55},
+  frauta:{p:[[1,1],[2,.12],[3,.06]],att:.035,dec:.25,sus:.75,rel:.07,vol:.3}};
+function tone(tm,dur,freq=523.25){
+  const c=ac(),T=TIMB[S.timbre]||TIMB.piano,g=c.createGain(),nodes=[],sum=T.p.reduce((s,x)=>s+x[1],0);
+  const rel=tm+Math.max(T.att+.02,dur),end=rel+T.rel*6;
+  T.p.forEach(([m,a])=>{if(freq*m>12000)return;const o=c.createOscillator(),ga=c.createGain();o.type="sine";o.frequency.value=freq*m;
+    ga.gain.value=a/sum*(m>1?Math.pow(.9,m):1);o.connect(ga).connect(g);o.start(tm);o.stop(end);nodes.push(o)});
+  g.gain.setValueAtTime(0,tm);g.gain.linearRampToValueAtTime(T.vol,tm+T.att);
+  g.gain.setTargetAtTime(T.vol*T.sus,tm+T.att,T.dec);g.gain.setTargetAtTime(0,rel,T.rel);
+  g.connect(out());return nodes}
 function stopAll(){if(!playing)return;const p=playing;playing=null;cancelAnimationFrame(p.raf);p.nodes.forEach(n=>{try{n.stop()}catch(e){}});p.done&&p.done(false)}
 function run(nodes,end,tick,done){
   stopAll();const c=ac(),p={nodes,raf:0,done};playing=p;
@@ -477,7 +545,7 @@ function draw(svg,p,opt={}){
 function render(){draw($("main"),S.user,{marks:S.checked?cmp(S.user,S.target):null})}
 function cmp(u,g){return u.k.map((k,i)=>k===g.k[i]&&(i===0||u.t[i-1]===g.t[i-1])&&(i===7||u.t[i]===g.t[i]))}
 function scoreUp(key,ok,pass){const c=S.sc[key];c.t++;if(ok){c.s++;c.k++}else c.k=0;updScore();pathHit(key,pass===undefined?ok:pass);totHit(ok)}
-function updScore(){$("sc").textContent=S.sc.r.s+"/"+S.sc.r.t;$("sk").textContent=S.sc.r.k;$("isc").textContent=S.sc.rid.s+"/"+S.sc.rid.t;$("isk").textContent=S.sc.rid.k;const m=S.sc[M.mode];$("msc").textContent=m.s+"/"+m.t;$("msk").textContent=m.k}
+function updScore(){$("sc").textContent=S.sc.r.s+"/"+S.sc.r.t;$("sk").textContent=S.sc.r.k;$("isc").textContent=S.sc.rid.s+"/"+S.sc.rid.t;$("isk").textContent=S.sc.rid.k;{const q=S.sc[typeof B!=="undefined"&&B.err?"re":"rb"];$("bsc").textContent=q.s+"/"+q.t;$("bsk").textContent=q.k}const m=S.sc[M.mode];$("msc").textContent=m.s+"/"+m.t;$("msk").textContent=m.k}
 function check(){
   const ok=cmp(S.user,S.target).every(Boolean);S.checked=true;
   if(!S.counted){S.counted=true;scoreUp("r",ok)}
@@ -541,19 +609,23 @@ const isBlack=m=>[1,3,6,8,10].includes(((m%12)+12)%12);
 const li7=st=>((st%7)+7)%7;
 const midiOf=(st,alt)=>{const oct=Math.floor(st/7)+4;return(oct+1)*12+WHITE[li7(st)]+alt};
 const freq=m=>440*Math.pow(2,(m-69)/12);
-const KEYDEFS={C:{n:"Do M",min:0,t:0,sig:{}},a:{n:"La m",min:1,t:-2,sig:{}},G:{n:"Sol M",min:0,t:4,sig:{3:1}},e:{n:"Mi m",min:1,t:2,sig:{3:1}},F:{n:"Fa M",min:0,t:3,sig:{6:-1}},d:{n:"Re m",min:1,t:1,sig:{6:-1}}};
-const KEYORDER=["C","a","G","e","F","d"];
-const SCALE=[["1","2","3","4","5","6","7","8"],["1","2","3","4","5","6","6+","7","7+","8"]];
+const KEYDEFS={C:{n:"Do M",min:0,t:0,sig:{}},a:{n:"La m",min:1,t:-2,sig:{}},
+  G:{n:"Sol M",min:0,t:4,sig:{3:1}},e:{n:"Mi m",min:1,t:2,sig:{3:1}},F:{n:"Fa M",min:0,t:3,sig:{6:-1}},d:{n:"Re m",min:1,t:1,sig:{6:-1}},
+  D:{n:"Re M",min:0,t:1,sig:{3:1,0:1}},b:{n:"Si m",min:1,t:-1,sig:{3:1,0:1}},Bb:{n:"Si♭ M",min:0,t:-1,sig:{6:-1,2:-1}},g:{n:"Sol m",min:1,t:4,sig:{6:-1,2:-1}},
+  A:{n:"La M",min:0,t:-2,sig:{3:1,0:1,4:1}},"f#":{n:"Fa♯ m",min:1,t:3,sig:{3:1,0:1,4:1}},Eb:{n:"Mi♭ M",min:0,t:2,sig:{6:-1,2:-1,5:-1}},c:{n:"Do m",min:1,t:0,sig:{6:-1,2:-1,5:-1}},X:{n:"Atonal",min:2,t:0,sig:{}}};
+const KEYGROUPS=[["",["X"]],["0",["C","a"]],["1♯",["G","e"]],["1♭",["F","d"]],["2♯",["D","b"]],["2♭",["Bb","g"]],["3♯",["A","f#"]],["3♭",["Eb","c"]]];
+const KEYORDER=KEYGROUPS.flatMap(g=>g[1]);
+const SCALE=[["1","2","3","4","5","6","7","8"],["1","2","3","4","5","6","6+","7","7+","8"],["1","1+","2","2+","3","4","4+","5","5+","6","6+","7","8"]];
 function cum(order){const o={};let acc=[];order.forEach((g,i)=>{acc=[...acc,...g];o[i+1]=[...acc]});return o}
-const LV=[cum([["5","3"],["6"],["1"],["2"],["4"],["7"],["8"],[]]),cum([["5","3"],["1"],["2"],["4"],["6"],["7+"],["8"],["6+","7"]])];
+const LV=[cum([["5","3"],["6"],["1"],["2"],["4"],["7"],["8"],[]]),cum([["5","3"],["1"],["2"],["4"],["6"],["7+"],["8"],["6+","7"]]),cum([["5","3"],["6"],["1"],["2","4"],["7","8"],["4+","6+"],["1+","5+"],["2+"]])];
 const G_={CLEF:"M434 2Q464 -103 464 -170Q464 -223 427.0 -257.0Q390 -291 337 -291Q287 -291 250.0 -261.5Q213 -232 213 -190Q213 -160 233.5 -133.5Q254 -107 283.5 -107.0Q313 -107 331.5 -128.5Q350 -150 350 -178Q350 -240 280 -240Q298 -268 338 -268Q353 -268 368.5 -263.5Q384 -259 401.0 -248.0Q418 -237 428.5 -213.5Q439 -190 439 -157Q439 -136 411 -6Q389 -12 356 -12Q259 -12 189.5 60.0Q120 132 120 232Q120 267 131.5 303.0Q143 339 157.5 366.5Q172 394 200.5 428.5Q229 463 248.5 483.5Q268 504 303 539Q280 621 280 689Q280 779 313.0 839.5Q346 900 379 900Q389 900 401.5 887.0Q414 874 426.0 851.0Q438 828 446.5 790.5Q455 753 455 710Q455 551 342 447L368 329Q384 332 397 332Q458 332 500.0 282.5Q542 233 542 162Q542 44 434 2ZM426 746Q426 801 394 801Q358 801 333.0 748.0Q308 695 308 630Q308 588 321 557Q359 580 392.5 639.5Q426 699 426 746ZM498 128Q498 183 466.0 216.0Q434 249 383 249L428 23Q498 52 498 128ZM407 17 361 247Q334 241 311.5 214.0Q289 187 289 158Q289 143 295.0 128.5Q301 114 309.5 104.0Q318 94 327.0 86.0Q336 78 342.0 74.5Q348 71 348 71L340 66Q307 75 277.5 106.0Q248 137 248 184Q248 231 277.5 270.5Q307 310 343 323L325 430Q168 299 168 177Q168 104 223.0 55.0Q278 6 348 6Q365 6 407 17Z",SHARP:"M365 24 319 6V-193L275 -209V-10L138 -63V-262L94 -279V-80L50 -96V0L94 17V262L50 245V341L94 358V589L138 606V376L275 429V659L319 675V446L365 464V366L319 348V104L365 122ZM275 88V332L138 279V34Z",FLAT:"M222 441Q275 441 302.0 408.0Q329 375 329 317Q329 273 299.5 234.0Q270 195 192.5 117.0Q115 39 56 -34V783L99 802V402Q148 441 222 441ZM232 308Q232 373 183 373Q159 373 134.5 358.5Q110 344 99 319V87Q159 155 195.5 214.5Q232 274 232 308Z",NAT:"M324 -273 280 -290V3L56 -87V656L99 675V344L324 433ZM280 93V328L99 254V19Z"};
-const clef=(x,g,sp)=>`<path class="clefp" transform="translate(${x} ${g}) scale(${sp/200} ${-sp/200}) translate(-120 -200)" d="${G_.CLEF}"/>`;
-const accG=(alt,x,y,sp)=>{const [d,cx,cy]=alt===1?[G_.SHARP,207,198]:alt===-1?[G_.FLAT,190,150]:[G_.NAT,190,192];
+const clef=(x,g,sp)=>`<path class="clefp" transform="translate(${x} ${g}) scale(${sp*1.22/200} ${-sp*1.22/200}) translate(-120 -200)" d="${G_.CLEF}"/>`;
+const accG=(alt,x,y,sp)=>{const [d,cx,cy]=alt===1?[G_.SHARP,207,198]:alt===-1?[G_.FLAT,190,225]:[G_.NAT,190,192];
   return `<path class="acc" transform="translate(${x} ${y}) scale(${sp/320} ${-sp/320}) translate(${-cx} ${-cy})" d="${d}"/>`};
 const SIGPOS={1:[10,7,11,8,5,9,6],"-1":[6,9,5,8,4,7,3]};
 function keySig(x,yf,sp,kd){let s="",i=0;const alts=Object.entries(kd.sig);
-  alts.forEach(([li,alt])=>{const order=alt===1?[3,0,4,1,5,2,6]:[6,2,5,1,4,0,3];const idx=order.indexOf(+li);s+=accG(alt,x+idx*sp*.8,yf(SIGPOS[alt][idx]),sp)});
-  return{svg:s,w:alts.length?alts.length*sp*.8+sp*.4:0}}
+  alts.forEach(([li,alt])=>{const order=alt===1?[3,0,4,1,5,2,6]:[6,2,5,1,4,0,3];const idx=order.indexOf(+li);s+=accG(alt,x+idx*sp*.9,yf(SIGPOS[alt][idx]),sp*.8)});
+  return{svg:s,w:alts.length?alts.length*sp*.9+sp*.5:0}}
 /* notas: id "st|alt" */
 const nid=(st,alt)=>st+"|"+alt;
 const pst=id=>+id.split("|")[0],palt=id=>+id.split("|")[1];
@@ -561,9 +633,9 @@ const midiId=id=>midiOf(pst(id),palt(id));
 function degId(kd,d){const st=kd.t+parseInt(d)-1,alt=(kd.sig[li7(st)]||0)+(d.endsWith("+")?1:0);return nid(st,alt)}
 const nameId=id=>NAMES[li7(pst(id))]+({1:"♯","-1":"♭",0:""})[palt(id)];
 const M={mode:store.get("mmode","mem"),pool:store.get("mpool",["C"]),key:"C",level:store.get("mlevel",1),count:store.get("mcount",5),heads:store.get("heads","w"),
-  custom:store.get("mcustom2",[null,null]),bpm:{mem:store.get("bpmMem",60),live:store.get("bpmLive",40)},target:[],user:[],pos:0,phase:"idle",checked:false,counted:false,hl:-1,ghost:null,sharp:false};
+  custom:store.get("mcustom2",[null,null,null]),bpm:{mem:store.get("bpmMem",60),live:store.get("bpmLive",40),err:store.get("bpmErr",60)},nErr:0,errShow:store.get("merrShow",0),errLen:store.get("merrLen",8),revealed:true,target:[],user:[],pos:0,phase:"idle",checked:false,counted:false,hl:-1,ghost:null,sharp:false};
 M.pool=(Array.isArray(M.pool)?M.pool:["C"]).filter(k=>KEYDEFS[k]);if(!M.pool.length)M.pool=["C"];
-if(!Array.isArray(M.custom)||M.custom.length!==2)M.custom=[null,null];
+if(!Array.isArray(M.custom))M.custom=[null,null,null];while(M.custom.length<3)M.custom.push(null);
 M.key=M.pool[0];
 const K=()=>KEYDEFS[M.key];
 const fam=()=>K().min;
@@ -575,7 +647,7 @@ const total=()=>M.target.length;
 const hasNotes=()=>M.user.some(v=>v!==null);
 const lowSt=()=>K().t,highSt=()=>K().t+7;
 function genM(){
-  const al=notes(),n=M.mode==="live"?20:M.count,out=[];let prev=refId();
+  const al=notes(),n=M.mode==="live"?20:M.mode==="err"?M.errLen:M.count,out=[];let prev=refId();
   for(let i=0;i<n;i++){
     let opts=al.filter(s=>Math.abs(midiId(s)-midiId(prev))<=9);if(!opts.length)opts=al;let s,g=0;
     do{s=opts[rnd(opts.length)]}while(g++<12&&((s===prev&&Math.random()<.75)||(out.length>=2&&s===out[out.length-1]&&s===out[out.length-2])));
@@ -587,11 +659,11 @@ function genM(){
 const PER=11,RH=172;
 let SX0=100;const SX=j=>SX0+j*60;
 const yS=(st,r)=>r*RH+110-(st-2)*8;
-function head(x,id,r,cls){
-  const st=pst(id),alt=palt(id),y=yS(st,r),li=li7(st),kalt=K().sig[li]||0;let h=`<g class="nt ${cls}">`;
+function head(x,id,r,cls,showAcc){
+  const st=pst(id),alt=palt(id),y=yS(st,r);let h=`<g class="nt ${cls}">`;
   for(let l=0;l>=st;l-=2)h+=`<line class="ledger" x1="${x-17}" y1="${yS(l,r)}" x2="${x+17}" y2="${yS(l,r)}"/>`;
   for(let l=12;l<=st;l+=2)h+=`<line class="ledger" x1="${x-17}" y1="${yS(l,r)}" x2="${x+17}" y2="${yS(l,r)}"/>`;
-  if(alt!==kalt)h+=accG(alt,x-25,y,16);
+  if(showAcc)h+=accG(alt,x-25,y,15);
   if(M.heads==="q")h+=`<ellipse class="head" cx="${x}" cy="${y}" rx="10" ry="7" transform="rotate(-20 ${x} ${y})"/>`;
   else h+=`<ellipse class="head" cx="${x}" cy="${y}" rx="11.5" ry="7.5"/><ellipse class="hole" cx="${x}" cy="${y}" rx="5.5" ry="3.8" transform="rotate(-45 ${x} ${y})"/>`;
   return h+`</g>`;
@@ -601,29 +673,30 @@ function drawStaff(svg,items,slots,opt={}){
   let s=chalkDefs(svg.id)+`<g filter="url(#ch-${svg.id})">`;
   for(let r=0;r<rows;r++){
     for(let st=2;st<=10;st+=2){const y=yS(st,r);s+=`<line class="sl" x1="10" y1="${y}" x2="790" y2="${y}"/>`}
-    s+=clef(22,yS(4,r),16);
-    const ks=keySig(70,st=>yS(st,r),16,K());s+=ks.svg;SX0=100+ks.w;
+    s+=clef(24,yS(4,r),16);
+    const ks=keySig(76,st=>yS(st,r),16,K());s+=ks.svg;SX0=110+ks.w;
+    const curA={},accOf=id=>{const st=pst(id),a=palt(id),c=st in curA?curA[st]:(K().sig[li7(st)]||0);return a!==c};
     for(let j=0;j<PER;j++){const idx=r*PER+j;if(idx>=slots)break;const x=SX(j);
       if(opt.hl===idx)s+=`<rect x="${x-30}" y="${r*RH+30}" width="60" height="136" rx="8" fill="var(--chalk)" opacity=".12"/>`;
       if(opt.pos===idx)s+=`<rect class="colhl" x="${x-30}" y="${r*RH+24}" width="60" height="142" rx="8"/><line class="cursor" x1="${x-16}" y1="${r*RH+164}" x2="${x+16}" y2="${r*RH+164}"/>`;
       const g=opt.ghost&&opt.ghost.slot===idx?opt.ghost:null,it=items[idx];
-      if(it&&!g)s+=head(x,it.id,r,it.c||"");
+      if(it&&!g){s+=head(x,it.id,r,it.c||"",accOf(it.id));curA[pst(it.id)]=palt(it.id)}
       else if(!g&&opt.pos!==idx)s+=`<circle class="slot" cx="${x}" cy="${r*RH+162}" r="3.5"/>`;
-      if(g)s+=head(x,g.id,r,"ghost"+(allowed(g.id)?"":" no"));
+      if(g)s+=head(x,g.id,r,"ghost"+(allowed(g.id)?"":" no"),accOf(g.id));
     }
   }
   svg.innerHTML=s+`</g>`;
 }
 function renderM(){
   const marks=M.checked?M.target.map((m,i)=>M.user[i]===m):null;
-  const items=[{id:refId(),c:"ref"},...M.user.map((m,i)=>m===null?null:{id:m,c:marks?(marks[i]?"ok":"bad"):""})];
+  const items=[{id:refId(),c:"ref"},...(M.revealed?M.user:[]).map((m,i)=>m===null?null:{id:m,c:marks?(marks[i]?"ok":"bad"):""})];
   const can=canWrite();
   drawStaff($("mstaff"),items,total()+1,{hl:M.hl,pos:can&&M.phase!=="playing"||can&&M.hl>0?M.pos+1:-1,ghost:can?M.ghost:null});
   $("inp").classList.toggle("off",!can);
   $("mundo").disabled=!hasNotes();$("mclear").disabled=!hasNotes();$("mmine").disabled=!hasNotes();
   $("msharp").setAttribute("aria-pressed",String(M.sharp));
 }
-function canWrite(){return M.mode==="mem"?M.phase==="write":(M.phase==="playing"&&M.hl!==0&&M.hl!==-1||M.phase==="write")}
+function canWrite(){if(M.mode==="err")return M.revealed;return M.mode==="mem"?M.phase==="write":(M.phase==="playing"&&M.hl!==0&&M.hl!==-1||M.phase==="write")}
 function putNote(i,id){
   if(!canWrite()||!allowed(id)||i<0||i>=total())return;
   M.user[i]=id;M.pos=Math.min(i+1,total()-1);M.sharp=false;mEdited();
@@ -651,9 +724,9 @@ function playM(){
     let msg;
     if(now<t0+b*1.6){setHl(0);msg=t().refPlay}
     else if(now<start){setHl(-1);msg=live&&now>=ci?[1,2,3,4].slice(0,Math.floor((now-ci)/b)+1).join("  "):""}
-    else{const i=Math.floor((now-start)/b);setHl(live?i+1:-1);msg=live?`${t().liveGo}  ${Math.min(i+1,total())}/${total()}`:t().memWait}
+    else{const i=Math.floor((now-start)/b);setHl(live?i+1:-1);msg=live?`${t().liveGo}  ${Math.min(i+1,total())}/${total()}`:M.mode==="err"?(M.revealed?fmt(t().mErrHint,{n:M.nErr}):t().hiddenMsg):t().memWait}
     if(msg!==last){last=msg;mStatus(msg)}
-  },()=>{M.phase="write";M.hl=-1;mStatus(live?"liveEnd":"memWrite");renderM()});
+  },()=>{M.phase="write";M.hl=-1;M.revealed=true;mStatus(live?"liveEnd":M.mode==="err"?fmt(t().mErrHint,{n:M.nErr}):"memWrite");renderM()});
 }
 function playMine(){
   const prev=M.phase,c=ac(),b=60/Math.max(M.bpm[M.mode],60),t0=c.currentTime+.12,nodes=[];
@@ -665,7 +738,7 @@ function checkM(){
   const n=total(),good=M.target.filter((m,i)=>M.user[i]===m).length,ok=good===n;
   M.checked=true;
   if(!M.counted){M.counted=true;scoreUp(M.mode,ok,M.mode==="live"?good/n>=.8:ok)}
-  $("mfb").textContent=ok?t().ok:fmt(t().partial,{a:good,b:n});$("mfb").className="fb"+(ok?" ok":"");
+  $("mfb").textContent=ok?(M.mode==="err"?t().errOk:t().ok):fmt(t().partial,{a:good,b:n});$("mfb").className="fb"+(ok?" ok":"");
   $("mshowSol").hidden=ok;renderM();
 }
 function newM(){
@@ -673,7 +746,12 @@ function newM(){
   if(M.pool.length>1){const o=M.pool.filter(k=>k!==M.key);M.key=o[rnd(o.length)]}else M.key=M.pool[0];
   M.target=genM();resetUser();M.phase="idle";M.checked=false;M.counted=false;M.hl=-1;M.ghost=null;M.sharp=false;
   buildKb();drawScale();lvLabel();
-  $("mfb").textContent="";$("mshowSol").hidden=true;$("msolbox").hidden=true;mStatus("melReady");renderM();
+  if(M.mode==="err"){const al=notes(),n=M.target.length,want=1+rnd(Math.max(1,Math.min(3,Math.floor(n/3))));
+    const idx=[...Array(n).keys()].sort(()=>Math.random()-.5).slice(0,want);M.user=[...M.target];
+    idx.forEach(i=>{const cur=midiId(M.target[i]);let alt=al.filter(x=>x!==M.target[i]&&Math.abs(midiId(x)-cur)<=5);if(!alt.length)alt=al.filter(x=>x!==M.target[i]);M.user[i]=alt[rnd(alt.length)]});
+    M.nErr=M.user.filter((x,i)=>x!==M.target[i]).length;M.phase="write";M.pos=0;M.revealed=!M.errShow}
+  else M.revealed=true;
+  $("mfb").textContent="";$("mshowSol").hidden=true;$("msolbox").hidden=true;mStatus(M.mode==="err"?(M.revealed?fmt(t().mErrHint,{n:M.nErr}):t().hiddenMsg):"melReady");renderM();
 }
 function buildKb(){
   const lo=midiOf(lowSt(),K().sig[li7(lowSt())]||0),hi=lo+12,al=notes(),whites=[];
@@ -688,18 +766,19 @@ function buildKb(){
   $("msharp").style.visibility=al.some(id=>palt(id)!==(K().sig[li7(pst(id))]||0))?"visible":"hidden";
 }
 function drawScale(){
-  const kd=K(),sc=SCALE[kd.min],sp=12,y=st=>56-(st-2)*sp/2,ks=keySig(42,y,sp,kd),x0=60+ks.w+10,x1=404,dx=(x1-x0)/(sc.length-1);
+  const kd=K(),sc=SCALE[kd.min],sp=12,y=st=>66-(st-2)*sp/2,x0=74,x1=408,dx=(x1-x0)/(sc.length-1);
   let s=`<g>`;
   for(let st=2;st<=10;st+=2)s+=`<line class="sl" x1="6" y1="${y(st)}" x2="414" y2="${y(st)}"/>`;
-  s+=clef(14,y(4),sp)+ks.svg;
+  s+=clef(16,y(4),sp);
   const ds=degs();
   sc.forEach((d,i)=>{const id=degId(kd,d),st=pst(id),alt=palt(id),x=x0+i*dx,cy=y(st),u=ds.includes(d)?"":"unused";
     s+=`<g class="${u}">`;
-    for(let l=0;l>=st;l-=2)s+=`<line class="ledger" x1="${x-12}" y1="${y(l)}" x2="${x+12}" y2="${y(l)}"/>`;
-    for(let l=12;l<=st;l+=2)s+=`<line class="ledger" x1="${x-12}" y1="${y(l)}" x2="${x+12}" y2="${y(l)}"/>`;
-    if(alt!==(kd.sig[li7(st)]||0))s+=accG(alt,x-15,cy,12);
-    s+=`<ellipse class="head" cx="${x}" cy="${cy}" rx="8" ry="5.5"/><ellipse class="hole" cx="${x}" cy="${cy}" rx="3.8" ry="2.6" transform="rotate(-45 ${x} ${cy})"/>`+
-      `<text class="sname" x="${x}" y="108">${nameId(id)}</text></g>`});
+    for(let l=0;l>=st;l-=2)s+=`<line class="ledger" x1="${x-11}" y1="${y(l)}" x2="${x+11}" y2="${y(l)}"/>`;
+    for(let l=12;l<=st;l+=2)s+=`<line class="ledger" x1="${x-11}" y1="${y(l)}" x2="${x+11}" y2="${y(l)}"/>`;
+    if(alt)s+=accG(alt,x-13,cy,10.5);
+    s+=`<ellipse class="head" cx="${x}" cy="${cy}" rx="7" ry="5"/><ellipse class="hole" cx="${x}" cy="${cy}" rx="3.4" ry="2.3" transform="rotate(-45 ${x} ${cy})"/>`+
+      `<text class="sname" x="${x}" y="114">${nameId(id)}</text></g>`});
+  s+=`<text class="kname" x="74" y="12">${kd.n}</text>`;
   $("scale").innerHTML=s+`</g>`;
   $("scale").dataset.x0=x0;$("scale").dataset.dx=dx;
 }
@@ -736,32 +815,35 @@ document.addEventListener("keydown",e=>{
 });
 
 function segSet(id,v){document.querySelectorAll(`#${id} button`).forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===String(v))))}
-function setMMode(m){stopAll();M.mode=m;store.set("mmode",m);segSet("mmode",m);$("countWrap").style.visibility=m==="mem"?"visible":"hidden";
+function setMMode(m){stopAll();M.mode=m;store.set("mmode",m);segSet("mmode",m);$("countWrap").style.display=m==="mem"?"":"none";$("errShowWrap").style.display=m==="err"?"":"none";$("errLenWrap").style.display=m==="err"?"":"none";segSet("merrShow",M.errShow);segSet("merrLen",M.errLen);
   $("mbpm").value=M.bpm[m];$("mbpmOut").textContent=M.bpm[m];updScore();newM()}
 function lvLabel(){const c=!!M.custom[fam()];$("mlvOut").textContent=M.level;$("mlvOut").classList.toggle("dim",c);
   const cap=$("sccap");cap.textContent=c?"✎ "+t().custom:t().custHint;cap.classList.toggle("on",c)}
-function buildKeys(){$("mkeys").innerHTML=KEYORDER.map(k=>`<button data-k="${k}" aria-pressed="${M.pool.includes(k)}">${KEYDEFS[k].n}</button>`).join("")}
-function setMLevel(l){M.level=l;M.custom=[null,null];store.set("mlevel",l);store.set("mcustom2",M.custom);$("mlv").value=l;newM()}
+function buildKeys(){$("mkeys").innerHTML=KEYGROUPS.map(([lab,ks])=>`<span class="kg"><i>${lab}</i>${ks.map(k=>`<button data-k="${k}" aria-pressed="${M.pool.includes(k)}">${KEYDEFS[k].n}</button>`).join("")}</span>`).join("")}
+function setMLevel(l){M.level=l;M.custom=[null,null,null];store.set("mlevel",l);store.set("mcustom2",M.custom);$("mlv").value=l;newM()}
 function toggleCustom(d){
   const cur=[...degs()],has=cur.includes(d);
   if(has&&cur.length<=2)return;
   const order=SCALE[fam()],next=(has?cur.filter(x=>x!==d):[...cur,d]).sort((a,b)=>order.indexOf(a)-order.indexOf(b));
   const lv=LV[fam()],key=x=>[...x].sort().join();
   const same=Object.keys(lv).find(k=>key(lv[k])===key(next));
-  if(same&&M.custom[1-fam()]===null){setMLevel(+same);return}
+  if(same&&M.custom.every((c,i)=>i===fam()||c===null)){setMLevel(+same);return}
   M.custom[fam()]=same&&+same===M.level?null:next;store.set("mcustom2",M.custom);
   const keep=M.key;newM();if(M.key!==keep&&M.pool.length>1){} 
 }
 $("scale").addEventListener("click",e=>{const sc=SCALE[fam()],p=svgPt($("scale"),e),x0=+$("scale").dataset.x0,dx=+$("scale").dataset.dx,i=Math.round((p.x-x0)/dx);
   if(i>=0&&i<sc.length&&Math.abs(p.x-(x0+i*dx))<=dx/2)toggleCustom(sc[i])});
 $("mkeys").onclick=e=>{const b=e.target.closest("button");if(!b)return;const k=b.dataset.k;
-  if(M.pool.includes(k)){if(M.pool.length>1)M.pool=M.pool.filter(x=>x!==k)}else M.pool=[...M.pool,k];
+  if(M.pool.includes(k)){M.pool=M.pool.filter(x=>x!==k);if(!M.pool.length)M.pool=["X"]}
+  else{M.pool=[...M.pool,k];if(k!=="X")M.pool=M.pool.filter(x=>x!=="X")}
   M.pool=KEYORDER.filter(x=>M.pool.includes(x));store.set("mpool",M.pool);buildKeys();M.key=M.pool[0];newM()};
 $("mlv").oninput=e=>setMLevel(+e.target.value);
 $("mmode").onclick=e=>{const b=e.target.closest("button");if(b)setMMode(b.dataset.v)};
 $("mcount").onclick=e=>{const b=e.target.closest("button");if(!b)return;M.count=+b.dataset.v;store.set("mcount",M.count);segSet("mcount",M.count);newM()};
 $("mheads").onclick=e=>{const b=e.target.closest("button");if(!b)return;M.heads=b.dataset.v;store.set("heads",M.heads);segSet("mheads",M.heads);renderM();if(!$("msolbox").hidden)showSolM()};
 $("mplay").onclick=playM;
+$("merrShow").onclick=e=>{const b=e.target.closest("button");if(!b)return;M.errShow=+b.dataset.v;store.set("merrShow",M.errShow);segSet("merrShow",M.errShow);newM()};
+$("merrLen").onclick=e=>{const b=e.target.closest("button");if(!b)return;M.errLen=+b.dataset.v;store.set("merrLen",M.errLen);segSet("merrLen",M.errLen);newM()};
 $("mmine").onclick=playMine;
 $("mundo").onclick=delNote;
 $("mclear").onclick=()=>{resetUser();mEdited()};
@@ -769,92 +851,113 @@ $("mcheck").onclick=checkM;
 $("mnext").onclick=newM;
 function showSolM(){$("msolbox").hidden=false;drawStaff($("msol"),[{id:refId(),c:"ref"},...M.target.map(id=>({id}))],total()+1)}
 $("mshowSol").onclick=showSolM;
-$("mbpm").oninput=e=>{M.bpm[M.mode]=+e.target.value;$("mbpmOut").textContent=e.target.value;store.set(M.mode==="mem"?"bpmMem":"bpmLive",+e.target.value)};
+$("mbpm").oninput=e=>{M.bpm[M.mode]=+e.target.value;$("mbpmOut").textContent=e.target.value;store.set({mem:"bpmMem",live:"bpmLive",err:"bpmErr"}[M.mode],+e.target.value)};
 
 /* ================= CÉLULAS E IDENTIFICACIÓN ================= */
 const CELLS={q:{p:1,ev:[[1]]},qr:{p:1,ev:[[1,1]]},ee:{p:1,ev:[[.5],[.5]]},h:{p:2,ev:[[2]]},hd:{p:3,ev:[[3]]},w:{p:4,ev:[[4]]},
   qde:{p:2,ev:[[1.5],[.5]]},er:{p:1,ev:[[.5],[.5,1]]},re:{p:1,ev:[[.5,1],[.5]]},ssss:{p:1,ev:[[.25],[.25],[.25],[.25]]},
   ess:{p:1,ev:[[.5],[.25],[.25]]},sse:{p:1,ev:[[.25],[.25],[.5]]},syn:{p:2,ev:[[.5],[1],[.5]]},eds:{p:1,ev:[[.75],[.25]]},ses:{p:1,ev:[[.25],[.5],[.25]]}};
 const CELL_ORDER=["q","qr","ee","h","hd","w","qde","er","re","ssss","ess","sse","syn","eds","ses"];
+const T3=1/3,T6=1/6;
+const CCELLS={dq:{p:1,ev:[[1]]},eee:{p:1,ev:[[T3],[T3],[T3]]},qe:{p:1,ev:[[2*T3],[T3]]},dh:{p:2,ev:[[2]]},dqr:{p:1,ev:[[1,1]]},
+  eq:{p:1,ev:[[T3],[2*T3]]},qer:{p:1,ev:[[2*T3],[T3,1]]},ree:{p:1,ev:[[T3,1],[T3],[T3]]},dese:{p:1,ev:[[.5],[T6],[T3]]},
+  ssee:{p:1,ev:[[T6],[T6],[T3],[T3]]},eess:{p:1,ev:[[T3],[T3],[T6],[T6]]},esse:{p:1,ev:[[T3],[T6],[T6],[T3]]},s6:{p:1,ev:[[T6],[T6],[T6],[T6],[T6],[T6]]}};
+const CCELL_ORDER=["dq","eee","qe","dh","dqr","eq","qer","ree","dese","ssee","eess","esse","s6"];
+const CL=id=>CELLS[id]||CCELLS[id];
+const isC=id=>!!CCELLS[id];
+const CCELLN={
+ gl:{dq:"Negra con puntillo",eee:"Tres corcheas",qe:"Negra e corchea",dh:"Branca con puntillo",dqr:"Silencio de negra con puntillo",eq:"Corchea e negra",qer:"Negra e silencio de corchea",ree:"Silencio de corchea e dúas corcheas",dese:"Corchea con puntillo, semicorchea e corchea",ssee:"Dúas semicorcheas e dúas corcheas",eess:"Dúas corcheas e dúas semicorcheas",esse:"Corchea, dúas semicorcheas e corchea",s6:"Seis semicorcheas"},
+ es:{dq:"Negra con puntillo",eee:"Tres corcheas",qe:"Negra y corchea",dh:"Blanca con puntillo",dqr:"Silencio de negra con puntillo",eq:"Corchea y negra",qer:"Negra y silencio de corchea",ree:"Silencio de corchea y dos corcheas",dese:"Corchea con puntillo, semicorchea y corchea",ssee:"Dos semicorcheas y dos corcheas",eess:"Dos corcheas y dos semicorcheas",esse:"Corchea, dos semicorcheas y corchea",s6:"Seis semicorcheas"},
+ ca:{dq:"Negra amb punt",eee:"Tres corxeres",qe:"Negra i corxera",dh:"Blanca amb punt",dqr:"Silenci de negra amb punt",eq:"Corxera i negra",qer:"Negra i silenci de corxera",ree:"Silenci de corxera i dues corxeres",dese:"Corxera amb punt, semicorxera i corxera",ssee:"Dues semicorxeres i dues corxeres",eess:"Dues corxeres i dues semicorxeres",esse:"Corxera, dues semicorxeres i corxera",s6:"Sis semicorxeres"},
+ eu:{dq:"Puntudun beltza",eee:"Hiru kortxea",qe:"Beltza eta kortxea",dh:"Puntudun zuria",dqr:"Puntudun beltzaren isilunea",eq:"Kortxea eta beltza",qer:"Beltza eta kortxearen isilunea",ree:"Kortxearen isilunea eta bi kortxea",dese:"Puntudun kortxea, kortxerdia eta kortxea",ssee:"Bi kortxerdi eta bi kortxea",eess:"Bi kortxea eta bi kortxerdi",esse:"Kortxea, bi kortxerdi eta kortxea",s6:"Sei kortxerdi"}};
+const cname=id=>(CELLN[S.lang][id]||CCELLN[S.lang][id]||id);
+const qu=(d,c)=>Math.round(d*(c?1.5:1)*4)/4;
+function cellEvents(id,x0,pw){const c=CL(id),cc=isC(id);let tt=0;return c.ev.map(e=>{const o={d:qu(e[0],cc),r:!!e[1],x:x0+tt*pw};tt+=e[0];return o})}
+function cellGlyphs(ev){let g="";ev.forEach(e=>{g+=e.r?restS(e.x,e.d):noteS(e.x,e.d)});
+  let gr=[];const flush=()=>{if(gr.length===1)g+=flagS(gr[0]);else if(gr.length>1)g+=beamS(gr);gr=[]};
+  ev.forEach(e=>{if(!e.r&&e.d<1)gr.push(e);else flush()});flush();return g}
 const CELLN={
  gl:{q:"Negra",qr:"Silencio de negra",ee:"Dúas corcheas",h:"Branca",hd:"Branca con puntillo",w:"Redonda",qde:"Negra con puntillo e corchea",er:"Corchea e silencio",re:"Silencio e corchea",ssss:"Catro semicorcheas",ess:"Corchea e dúas semicorcheas",sse:"Dúas semicorcheas e corchea",syn:"Síncopa",eds:"Corchea con puntillo e semicorchea",ses:"Semicorchea, corchea, semicorchea"},
  es:{q:"Negra",qr:"Silencio de negra",ee:"Dos corcheas",h:"Blanca",hd:"Blanca con puntillo",w:"Redonda",qde:"Negra con puntillo y corchea",er:"Corchea y silencio",re:"Silencio y corchea",ssss:"Cuatro semicorcheas",ess:"Corchea y dos semicorcheas",sse:"Dos semicorcheas y corchea",syn:"Síncopa",eds:"Corchea con puntillo y semicorchea",ses:"Semicorchea, corchea, semicorchea"},
  ca:{q:"Negra",qr:"Silenci de negra",ee:"Dues corxeres",h:"Blanca",hd:"Blanca amb punt",w:"Rodona",qde:"Negra amb punt i corxera",er:"Corxera i silenci",re:"Silenci i corxera",ssss:"Quatre semicorxeres",ess:"Corxera i dues semicorxeres",sse:"Dues semicorxeres i corxera",syn:"Síncope",eds:"Corxera amb punt i semicorxera",ses:"Semicorxera, corxera, semicorxera"},
  eu:{q:"Beltza",qr:"Beltzaren isilunea",ee:"Bi kortxea",h:"Zuria",hd:"Puntudun zuria",w:"Biribila",qde:"Puntudun beltza eta kortxea",er:"Kortxea eta isilunea",re:"Isilunea eta kortxea",ssss:"Lau kortxerdi",ess:"Kortxea eta bi kortxerdi",sse:"Bi kortxerdi eta kortxea",syn:"Sinkopa",eds:"Puntudun kortxea eta kortxerdia",ses:"Kortxerdia, kortxea, kortxerdia"}};
-Object.assign(STR.gl,{idBad:"Non era esa: a correcta está en verde.",secP:"Camiño",rPre:"Palitos",rId:"Identificar",cellsL:"Células",cells:"células",idHint:"Escoita e escolle o ritmo que soou",idAfter:"Toca as opcións para escoitalas",stage:"Etapa",exit:"Saír",nextStage:"Seguinte etapa",passed:"Etapa superada!",pathIntro:"Completa cada etapa con {g} acertos á primeira para desbloquear a seguinte. Nos dictados ao momento chega con acertar o 80 %.",admNote:"Por agora todo isto gárdase só neste navegador. Máis adiante pasarémolo a Supabase para que o vexa todo o alumnado.",admCells:"Orde das células rítmicas",admPath:"Itinerario do camiño",admReset:"Restaurar por defecto",admProg:"Borrar o progreso",admExport:"Copiar configuración",admImport:"Pegar configuración",admApply:"Aplicar",admCopied:"Configuración copiada.",admBad:"Esa configuración non é válida.",admDone:"Feito.",modeMemS:"de memoria",modeLiveS:"ao momento",locked:"bloqueada",doneS:"superada"});
-Object.assign(STR.es,{idBad:"No era esa: la correcta está en verde.",secP:"Camino",rPre:"Palitos",rId:"Identificar",cellsL:"Células",cells:"células",idHint:"Escucha y elige el ritmo que ha sonado",idAfter:"Toca las opciones para escucharlas",stage:"Etapa",exit:"Salir",nextStage:"Siguiente etapa",passed:"¡Etapa superada!",pathIntro:"Completa cada etapa con {g} aciertos a la primera para desbloquear la siguiente. En los dictados al momento basta con acertar el 80 %.",admNote:"Por ahora todo esto se guarda solo en este navegador. Más adelante lo pasaremos a Supabase para que lo vea todo el alumnado.",admCells:"Orden de las células rítmicas",admPath:"Itinerario del camino",admReset:"Restaurar por defecto",admProg:"Borrar el progreso",admExport:"Copiar configuración",admImport:"Pegar configuración",admApply:"Aplicar",admCopied:"Configuración copiada.",admBad:"Esa configuración no es válida.",admDone:"Hecho.",modeMemS:"de memoria",modeLiveS:"al momento",locked:"bloqueada",doneS:"superada"});
-Object.assign(STR.ca,{idBad:"No era aquesta: la correcta és en verd.",secP:"Camí",rPre:"Pals",rId:"Identificar",cellsL:"Cèl·lules",cells:"cèl·lules",idHint:"Escolta i tria el ritme que ha sonat",idAfter:"Toca les opcions per escoltar-les",stage:"Etapa",exit:"Sortir",nextStage:"Etapa següent",passed:"Etapa superada!",pathIntro:"Completa cada etapa amb {g} encerts a la primera per desbloquejar la següent. En els dictats a l’instant n’hi ha prou amb encertar el 80 %.",admNote:"De moment tot això es desa només en aquest navegador. Més endavant ho passarem a Supabase perquè ho vegi tot l’alumnat.",admCells:"Ordre de les cèl·lules rítmiques",admPath:"Itinerari del camí",admReset:"Restaurar per defecte",admProg:"Esborrar el progrés",admExport:"Copiar la configuració",admImport:"Enganxar la configuració",admApply:"Aplicar",admCopied:"Configuració copiada.",admBad:"Aquesta configuració no és vàlida.",admDone:"Fet.",modeMemS:"de memòria",modeLiveS:"a l’instant",locked:"bloquejada",doneS:"superada"});
-Object.assign(STR.eu,{idBad:"Ez zen hori: zuzena berdez dago.",secP:"Bidea",rPre:"Makilak",rId:"Identifikatu",cellsL:"Zelulak",cells:"zelula",idHint:"Entzun eta aukeratu entzun den erritmoa",idAfter:"Ukitu aukerak entzuteko",stage:"Etapa",exit:"Irten",nextStage:"Hurrengo etapa",passed:"Etapa gaindituta!",pathIntro:"Osatu etapa bakoitza lehen saiakeran {g} asmaturekin hurrengoa desblokeatzeko. Une bereko diktaketan % 80 asmatzea nahikoa da.",admNote:"Oraingoz hau guztia nabigatzaile honetan bakarrik gordetzen da. Aurrerago Supabasera eramango dugu ikasle guztiek ikus dezaten.",admCells:"Zelula erritmikoen ordena",admPath:"Bidearen ibilbidea",admReset:"Lehenetsia berrezarri",admProg:"Aurrerapena ezabatu",admExport:"Konfigurazioa kopiatu",admImport:"Konfigurazioa itsatsi",admApply:"Aplikatu",admCopied:"Konfigurazioa kopiatuta.",admBad:"Konfigurazio hori ez da baliozkoa.",admDone:"Eginda.",modeMemS:"memoriaz",modeLiveS:"une berean",locked:"blokeatuta",doneS:"gaindituta"});
+Object.assign(STR.gl,{admCCells:"Orde das células ternarias (6/8, 9/8, 12/8)",idBad:"Non era esa: a correcta está en verde.",secP:"Camiño",rPre:"Palitos",rId:"Identificar",cellsL:"Células",cells:"células",idHint:"Escoita e escolle o ritmo que soou",idAfter:"Toca as opcións para escoitalas",stage:"Etapa",exit:"Saír",nextStage:"Seguinte etapa",passed:"Etapa superada!",pathIntro:"Completa cada etapa con {g} acertos á primeira para desbloquear a seguinte. Nos dictados ao momento chega con acertar o 80 %.",admNote:"Por agora todo isto gárdase só neste navegador. Máis adiante pasarémolo a Supabase para que o vexa todo o alumnado.",admCells:"Orde das células rítmicas",admPath:"Itinerario do camiño",admReset:"Restaurar por defecto",admProg:"Borrar o progreso",admExport:"Copiar configuración",admImport:"Pegar configuración",admApply:"Aplicar",admCopied:"Configuración copiada.",admBad:"Esa configuración non é válida.",admDone:"Feito.",modeMemS:"de memoria",modeLiveS:"ao momento",locked:"bloqueada",doneS:"superada"});
+Object.assign(STR.es,{admCCells:"Orden de las células ternarias (6/8, 9/8, 12/8)",idBad:"No era esa: la correcta está en verde.",secP:"Camino",rPre:"Palitos",rId:"Identificar",cellsL:"Células",cells:"células",idHint:"Escucha y elige el ritmo que ha sonado",idAfter:"Toca las opciones para escucharlas",stage:"Etapa",exit:"Salir",nextStage:"Siguiente etapa",passed:"¡Etapa superada!",pathIntro:"Completa cada etapa con {g} aciertos a la primera para desbloquear la siguiente. En los dictados al momento basta con acertar el 80 %.",admNote:"Por ahora todo esto se guarda solo en este navegador. Más adelante lo pasaremos a Supabase para que lo vea todo el alumnado.",admCells:"Orden de las células rítmicas",admPath:"Itinerario del camino",admReset:"Restaurar por defecto",admProg:"Borrar el progreso",admExport:"Copiar configuración",admImport:"Pegar configuración",admApply:"Aplicar",admCopied:"Configuración copiada.",admBad:"Esa configuración no es válida.",admDone:"Hecho.",modeMemS:"de memoria",modeLiveS:"al momento",locked:"bloqueada",doneS:"superada"});
+Object.assign(STR.ca,{admCCells:"Ordre de les cèl·lules ternàries (6/8, 9/8, 12/8)",idBad:"No era aquesta: la correcta és en verd.",secP:"Camí",rPre:"Pals",rId:"Identificar",cellsL:"Cèl·lules",cells:"cèl·lules",idHint:"Escolta i tria el ritme que ha sonat",idAfter:"Toca les opcions per escoltar-les",stage:"Etapa",exit:"Sortir",nextStage:"Etapa següent",passed:"Etapa superada!",pathIntro:"Completa cada etapa amb {g} encerts a la primera per desbloquejar la següent. En els dictats a l’instant n’hi ha prou amb encertar el 80 %.",admNote:"De moment tot això es desa només en aquest navegador. Més endavant ho passarem a Supabase perquè ho vegi tot l’alumnat.",admCells:"Ordre de les cèl·lules rítmiques",admPath:"Itinerari del camí",admReset:"Restaurar per defecte",admProg:"Esborrar el progrés",admExport:"Copiar la configuració",admImport:"Enganxar la configuració",admApply:"Aplicar",admCopied:"Configuració copiada.",admBad:"Aquesta configuració no és vàlida.",admDone:"Fet.",modeMemS:"de memòria",modeLiveS:"a l’instant",locked:"bloquejada",doneS:"superada"});
+Object.assign(STR.eu,{admCCells:"Zelula hirutarren ordena (6/8, 9/8, 12/8)",idBad:"Ez zen hori: zuzena berdez dago.",secP:"Bidea",rPre:"Makilak",rId:"Identifikatu",cellsL:"Zelulak",cells:"zelula",idHint:"Entzun eta aukeratu entzun den erritmoa",idAfter:"Ukitu aukerak entzuteko",stage:"Etapa",exit:"Irten",nextStage:"Hurrengo etapa",passed:"Etapa gaindituta!",pathIntro:"Osatu etapa bakoitza lehen saiakeran {g} asmaturekin hurrengoa desblokeatzeko. Une bereko diktaketan % 80 asmatzea nahikoa da.",admNote:"Oraingoz hau guztia nabigatzaile honetan bakarrik gordetzen da. Aurrerago Supabasera eramango dugu ikasle guztiek ikus dezaten.",admCells:"Zelula erritmikoen ordena",admPath:"Bidearen ibilbidea",admReset:"Lehenetsia berrezarri",admProg:"Aurrerapena ezabatu",admExport:"Konfigurazioa kopiatu",admImport:"Konfigurazioa itsatsi",admApply:"Aplikatu",admCopied:"Konfigurazioa kopiatuta.",admBad:"Konfigurazio hori ez da baliozkoa.",admDone:"Eginda.",modeMemS:"memoriaz",modeLiveS:"une berean",locked:"blokeatuta",doneS:"gaindituta"});
 const RG={r4:"M55 208Q55 242 77.5 260.0Q100 278 130 278Q150 278 178 267L65 415Q145 487 145 544Q145 589 91 658H136L264 502Q181 404 181 356Q181 310 259 217L243 194Q203 217 176 217Q140 217 140.0 173.0Q140 129 179 84L165 62Q55 144 55 208Z",r8:"M136 443Q152 443 175.0 466.5Q198 490 213 511H234L138 166H101L173 426Q126 402 97.0 402.0Q68 402 43.5 422.5Q19 443 19 473Q19 495 35.0 513.5Q51 532 79 532Q106 532 122.0 513.5Q138 495 138 473Q138 458 131 445Q135 443 136 443Z",r16:"M189 443Q205 443 229.0 467.0Q253 491 265 511H287L138 -23H101L173 237Q126 213 97.0 213.0Q68 213 43.5 233.5Q19 254 19 284Q19 306 35.0 324.5Q51 343 79 343Q106 343 122.0 324.5Q138 306 138 284Q138 269 131 256Q135 254 136 254Q155 254 189 291L226 425Q181 402 149 402Q121 402 96.0 422.0Q71 442 71 472Q71 498 88.5 514.5Q106 531 130 531Q155 531 172.5 514.0Q190 497 190 472Q190 457 184 445Q188 443 189 443Z"};
 const NL=60;
-function noteS(x,d){const hollow=d>=2;let s=`<ellipse class="nh" cx="${x}" cy="${NL}" rx="9" ry="6.5" transform="rotate(-20 ${x} ${NL})"/>`;
-  if(hollow)s+=`<ellipse cx="${x}" cy="${NL}" rx="5.6" ry="3" transform="rotate(-20 ${x} ${NL})" fill="var(--board)"/>`;
-  if(d<4)s+=`<line class="nst" x1="${x+8}" y1="${NL-2}" x2="${x+8}" y2="${NL-44}"/>`;
-  if(d===1.5||d===3||d===.75)s+=`<circle class="nh" cx="${x+17}" cy="${NL-3}" r="2.6"/>`;return s}
-function restS(x,d){
+const SO=6.6;
+function noteS(x,d){const hollow=d>=2;let s=`<ellipse class="nh" cx="${x}" cy="${NL}" rx="7.4" ry="5.3" transform="rotate(-20 ${x} ${NL})"/>`;
+  if(hollow)s+=`<ellipse cx="${x}" cy="${NL}" rx="4.6" ry="2.4" transform="rotate(-20 ${x} ${NL})" fill="var(--board)"/>`;
+  if(d<4)s+=`<line class="nst" x1="${x+SO}" y1="${NL-2}" x2="${x+SO}" y2="${NL-42}"/>`;
+  if(d===1.5||d===3||d===.75)s+=`<circle class="nh" cx="${x+13}" cy="${NL-3}" r="2.2"/>`;return s}
+function restS(x,d){if(d===1.5||d===3)return restS(x,d/1.5)+`<circle class="nrest" cx="${x+13}" cy="${NL-3}" r="2.6"/>`;
   if(d===1)return `<path class="nrest" transform="translate(${x} ${NL-6}) scale(.068 -.068) translate(-160 -360)" d="${RG.r4}"/>`;
   if(d===.5)return `<path class="nrest" transform="translate(${x} ${NL-6}) scale(.075 -.075) translate(-126 -350)" d="${RG.r8}"/>`;
   if(d===.25)return `<path class="nrest" transform="translate(${x} ${NL-2}) scale(.075 -.075) translate(-153 -254)" d="${RG.r16}"/>`;
   if(d===2)return `<rect class="nrest" x="${x-9}" y="${NL-7}" width="18" height="7"/>`;
   return `<rect class="nrest" x="${x-9}" y="${NL}" width="18" height="7"/>`}
-function beamS(g){const y=NL-44,x=e=>e.x+8;let s=`<line class="nbm" x1="${x(g[0])-1.3}" y1="${y+3}" x2="${x(g[g.length-1])+1.3}" y2="${y+3}"/>`;
+function beamS(g){const y=NL-42,x=e=>e.x+SO;let s=`<line class="nbm" x1="${x(g[0])-1}" y1="${y+2}" x2="${x(g[g.length-1])+1}" y2="${y+2}"/>`;
   g.forEach((e,i)=>{if(e.d!==.25)return;const nx=g[i+1],pv=g[i-1];
-    if(nx&&nx.d===.25)s+=`<line class="nbm" x1="${x(e)-1.3}" y1="${y+11}" x2="${x(nx)+1.3}" y2="${y+11}"/>`;
-    else if(!(pv&&pv.d===.25))s+=pv?`<line class="nbm" x1="${x(e)-11}" y1="${y+11}" x2="${x(e)+1.3}" y2="${y+11}"/>`:`<line class="nbm" x1="${x(e)-1.3}" y1="${y+11}" x2="${x(e)+11}" y2="${y+11}"/>`});
+    if(nx&&nx.d===.25)s+=`<line class="nbm" x1="${x(e)-1}" y1="${y+9}" x2="${x(nx)+1}" y2="${y+9}"/>`;
+    else if(!(pv&&pv.d===.25))s+=pv?`<line class="nbm" x1="${x(e)-9}" y1="${y+9}" x2="${x(e)+1}" y2="${y+9}"/>`:`<line class="nbm" x1="${x(e)-1}" y1="${y+9}" x2="${x(e)+9}" y2="${y+9}"/>`});
   return s}
-function flagS(e){const x=e.x+8,y=NL-44;let s=`<path class="nfl" d="M${x} ${y} q3 10 11 14 q5 4 1 15"/>`;if(e.d===.25)s+=`<path class="nfl" d="M${x} ${y+9} q3 10 11 14 q5 4 1 15"/>`;return s}
+function flagS(e){const x=e.x+SO,y=NL-42;let s=`<path class="nfl" d="M${x} ${y} q3 9 9 12 q4 4 1 13"/>`;if(e.d===.25)s+=`<path class="nfl" d="M${x} ${y+8} q3 9 9 12 q4 4 1 13"/>`;return s}
 function notate(ids,pw=84){
   const X0=24;let t=0,s="";
-  ids.forEach(id=>{const c=CELLS[id];let tt=0;const ev=c.ev.map(e=>{const o={d:e[0],r:!!e[1],x:X0+(t+tt)*pw};tt+=e[0];return o});t+=c.p;
-    ev.forEach(e=>{s+=e.r?restS(e.x,e.d):noteS(e.x,e.d)});
-    let g=[];const flush=()=>{if(g.length===1)s+=flagS(g[0]);else if(g.length>1)s+=beamS(g);g=[]};
-    ev.forEach(e=>{if(!e.r&&e.d<1)g.push(e);else flush()});flush()});
-  const w=X0+t*pw+6;
+  ids.forEach(id=>{const c=CL(id),wpw=isC(id)?pw*1.25:pw;s+=cellGlyphs(cellEvents(id,X0+t,wpw));t+=c.p*wpw});
+  const w=X0+t+6;
   return{svg:`<line class="nl" x1="4" y1="${NL}" x2="${w-4}" y2="${NL}"/>`+s+`<line class="nl" x1="${w-4}" y1="${NL-12}" x2="${w-4}" y2="${NL+12}" style="opacity:.8"/>`,w,h:84}}
 const notSvg=(ids,pw)=>{const n=notate(ids,pw);return `<svg viewBox="0 0 ${n.w} ${n.h}" aria-hidden="true">${n.svg}</svg>`};
 /* configuración (admin) */
-const PATH_DEF=[{t:"rpre",lv:1},{t:"mel",m:"mem",k:"C",lv:1},{t:"rid",n:2},{t:"rpre",lv:2},{t:"mel",m:"mem",k:"C",lv:2},{t:"rid",n:3},{t:"rpre",lv:3},
- {t:"mel",m:"mem",k:"C",lv:3},{t:"rid",n:4},{t:"rpre",lv:4},{t:"mel",m:"live",k:"C",lv:3},{t:"mel",m:"mem",k:"C",lv:4},{t:"rid",n:5},{t:"mel",m:"mem",k:"C",lv:5},
- {t:"rid",n:6},{t:"mel",m:"mem",k:"C",lv:6},{t:"mel",m:"live",k:"C",lv:5},{t:"rid",n:7},{t:"mel",m:"mem",k:"C",lv:7},{t:"rid",n:8},{t:"mel",m:"mem",k:"a",lv:4},
- {t:"rid",n:9},{t:"mel",m:"mem",k:"a",lv:7},{t:"mel",m:"live",k:"C",lv:7},{t:"rid",n:10},{t:"mel",m:"mem",k:"G",lv:7},{t:"mel",m:"mem",k:"F",lv:7},
- {t:"rid",n:12},{t:"mel",m:"mem",k:"e",lv:7},{t:"mel",m:"mem",k:"d",lv:7},{t:"rid",n:15}];
-const cfgDefault=()=>({cells:CELL_ORDER.map(id=>({id,on:true})),path:JSON.parse(JSON.stringify(PATH_DEF))});
-function validCfg(c){return c&&Array.isArray(c.cells)&&Array.isArray(c.path)&&c.cells.every(x=>CELLS[x.id])&&c.path.every(s=>["rpre","rid","mel"].includes(s.t))}
+const PATH_DEF=[{t:"rpre",lv:1},{t:"mel",m:"mem",k:"C",lv:1},{t:"rid",n:2},{t:"rbuild",n:2,m:"2/4",bars:2},{t:"rpre",lv:2},{t:"mel",m:"mem",k:"C",lv:2},{t:"rid",n:3},{t:"rpre",lv:3},
+ {t:"mel",m:"mem",k:"C",lv:3},{t:"rid",n:4},{t:"rpre",lv:4},{t:"mel",m:"live",k:"C",lv:3},{t:"mel",m:"mem",k:"C",lv:4},{t:"rid",n:5},{t:"rbuild",n:5,m:"3/4",bars:2},{t:"rbuild",n:5,m:"2/4",bars:2,err:1},{t:"mel",m:"err",k:"C",lv:5},{t:"mel",m:"mem",k:"C",lv:5},
+ {t:"rid",n:6},{t:"mel",m:"mem",k:"C",lv:6},{t:"mel",m:"live",k:"C",lv:5},{t:"rid",n:7},{t:"mel",m:"mem",k:"C",lv:7},{t:"rid",n:8},{t:"rbuild",n:8,m:"4/4",bars:2},{t:"rbuild",n:8,m:"4/4",bars:2,err:1},{t:"rbuild",n:3,m:"6/8",bars:2},{t:"mel",m:"err",k:"a",lv:7},{t:"mel",m:"mem",k:"a",lv:4},
+ {t:"rid",n:9},{t:"rid",n:3,ter:1},{t:"mel",m:"mem",k:"a",lv:7},{t:"mel",m:"live",k:"C",lv:7},{t:"rid",n:10},{t:"rid",n:7,ter:1},{t:"mel",m:"mem",k:"G",lv:7},{t:"mel",m:"mem",k:"F",lv:7},
+ {t:"rid",n:12},{t:"rbuild",n:12,m:"4/4",bars:2},{t:"rbuild",n:7,m:"9/8",bars:2},{t:"mel",m:"mem",k:"e",lv:7},{t:"mel",m:"mem",k:"d",lv:7},{t:"rid",n:15,o:6},{t:"rid",n:13,ter:1,o:6},{t:"rbuild",n:15,m:"4/4",bars:2},{t:"rbuild",n:13,m:"12/8",bars:2},{t:"rbuild",n:13,m:"6/8",bars:4,err:1}];
+const cfgDefault=()=>({cells:CELL_ORDER.map(id=>({id,on:true})),ccells:CCELL_ORDER.map(id=>({id,on:true})),path:JSON.parse(JSON.stringify(PATH_DEF))});
+function normCfg(c){if(!Array.isArray(c.ccells))c.ccells=[];c.ccells=c.ccells.filter(x=>CCELLS[x.id]);
+  CELL_ORDER.forEach(id=>{if(!c.cells.find(x=>x.id===id))c.cells.push({id,on:true})});
+  CCELL_ORDER.forEach(id=>{if(!c.ccells.find(x=>x.id===id))c.ccells.push({id,on:true})});return c}
+function validCfg(c){return c&&Array.isArray(c.cells)&&Array.isArray(c.path)&&c.cells.every(x=>CL(x.id))&&c.path.every(s=>["rpre","rid","rbuild","mel"].includes(s.t)&&(s.t!=="mel"||KEYDEFS[s.k]))}
 let CFG=store.get("cfg",null);if(!validCfg(CFG))CFG=cfgDefault();
-CELL_ORDER.forEach(id=>{if(!CFG.cells.find(c=>c.id===id))CFG.cells.push({id,on:true})});
+normCfg(CFG);
 const saveCfg=()=>store.set("cfg",CFG);
 const activeCells=()=>CFG.cells.filter(c=>c.on).map(c=>c.id);
+const activeCCells=()=>CFG.ccells.filter(c=>c.on).map(c=>c.id);
 /* identificación */
-const I={n:store.get("ridN",2),bpm:store.get("ibpm",80),target:[],opts:[],answer:-1,counted:false,playing:-1};
-const ridPool=()=>activeCells().slice(0,Math.max(2,Math.min(I.n,activeCells().length)));
+const I={ter:store.get("ridTer",0),nopt:store.get("ridOptN",4),n:store.get("ridN",2),bpm:store.get("ibpm",80),target:[],opts:[],answer:-1,counted:false,playing:-1};
+const ridList=()=>I.ter?activeCCells():activeCells();
+const ridPool=()=>ridList().slice(0,Math.max(2,Math.min(I.n,ridList().length)));
 function genRhythm(pool,pulses=4){
   const newest=pool[pool.length-1];let out,g=0;
-  do{out=[];let left=pulses,gg=0;while(left>0&&gg++<40){const ok=pool.filter(id=>CELLS[id].p<=left);const id=ok[rnd(ok.length)];out.push(id);left-=CELLS[id].p}
+  do{out=[];let left=pulses,gg=0;while(left>0&&gg++<40){const ok=pool.filter(id=>CL(id).p<=left);const id=ok[rnd(ok.length)];out.push(id);left-=CL(id).p}
   }while(g++<30&&(pool.length>2&&!out.includes(newest)&&Math.random()<.7||out.every(x=>x===out[0])&&pool.length>1&&Math.random()<.8));
   return out}
-function variants(base,pool){
+function variants(base,pool,k=3){
   const key=a=>a.join(","),seen=new Set([key(base)]),res=[];let g=0;
-  while(res.length<3&&g++<200){const v=[...base];const i=rnd(v.length),p=CELLS[v[i]].p;
-    const alt=pool.filter(id=>id!==v[i]&&CELLS[id].p===p);
+  while(res.length<k&&g++<400){const v=[...base];const i=rnd(v.length),p=CL(v[i]).p;
+    const alt=pool.filter(id=>id!==v[i]&&CL(id).p===p);
     if(alt.length)v[i]=alt[rnd(alt.length)];
     else{const r=genRhythm(pool,p);v.splice(i,1,...r)}
-    if(Math.random()<.3){const j=rnd(v.length),alt2=pool.filter(id=>id!==v[j]&&CELLS[id].p===CELLS[v[j]].p);if(alt2.length)v[j]=alt2[rnd(alt2.length)]}
+    if(Math.random()<.3){const j=rnd(v.length),alt2=pool.filter(id=>id!==v[j]&&CL(id).p===CL(v[j]).p);if(alt2.length)v[j]=alt2[rnd(alt2.length)]}
     if(!seen.has(key(v))){seen.add(key(v));res.push(v)}}
   return res}
-function newId(){stopAll();const pool=ridPool();I.target=genRhythm(pool);I.opts=[I.target,...variants(I.target,pool)].sort(()=>Math.random()-.5);
+function newId(){stopAll();const pool=ridPool();I.target=genRhythm(pool);I.opts=[I.target,...variants(I.target,pool,I.nopt-1)].sort(()=>Math.random()-.5);
   I.answer=-1;I.counted=false;I.playing=-1;$("ifb").textContent="";$("istatus").textContent=t().idHint;renderId()}
 function renderId(){
-  const pool=ridPool();$("ridN").max=Math.max(2,activeCells().length);$("ridN").value=Math.min(I.n,activeCells().length);$("ridOut").textContent=pool.length;
-  $("ridChips").innerHTML=pool.map(id=>notSvg([id],64).replace("<svg",`<svg role="img" aria-label="${CELLN[S.lang][id]}"`)).join("");
+  const pool=ridPool();$("ridN").max=Math.max(2,ridList().length);$("ridN").value=Math.min(I.n,ridList().length);segSet("ridTer",I.ter);segSet("ridOptN",I.nopt);$("ridOut").textContent=pool.length;
+  $("ridChips").innerHTML=pool.map(id=>notSvg([id],64).replace("<svg",`<svg role="img" aria-label="${cname(id)}"`)).join("");
   $("ridOpts").innerHTML=I.opts.map((o,i)=>{const cls=I.answer<0?(I.playing===i?"pl":""):(o===I.target?"ok":i===I.answer?"bad":"");
-    return `<button data-i="${i}" class="${cls}"><span class="tag">${"ABCD"[i]}</span>${notSvg(o,84)}</button>`}).join("");
+    return `<button data-i="${i}" class="${cls}"><span class="tag">${"ABCDEFGH"[i]}</span>${notSvg(o,84)}</button>`}).join("");
 }
-function playCells(ids,bpm,onDone){
-  const c=ac(),b=60/bpm,t0=c.currentTime+.12,start=t0+4*b,nodes=[];let tt=0;
-  for(let i=0;i<4;i++)nodes.push(...click(t0+i*b,i===0?1:.6));
-  ids.forEach(id=>CELLS[id].ev.forEach(e=>{if(!e[1])nodes.push(...tone(start+tt*b,Math.max(.08,e[0]*b-.06)));tt+=e[0]}));
-  if(S.pulse)for(let i=0;i<tt;i++)nodes.push(...click(start+i*b,.25));
-  run(nodes,start+tt*b,now=>{if(now<start)$("istatus").textContent=[1,2,3,4].slice(0,Math.floor((now-t0)/b)+1).join("  ")},onDone);
+function playCells(ids,bpm,onDone,stEl="istatus",beats=4){
+  const c=ac(),b=60/bpm,ci=beats>=3?beats:beats*2,t0=c.currentTime+.12,start=t0+ci*b,nodes=[];let tt=0;
+  for(let i=0;i<ci;i++)nodes.push(...click(t0+i*b,i%beats===0?1:.6));
+  ids.forEach(id=>CL(id).ev.forEach(e=>{const d=e[0]*b;if(!e[1])nodes.push(...tone(start+tt*b,Math.max(.05,d-Math.min(.06,d*.3)),392));tt+=e[0]}));
+  if(S.pulse)for(let i=0;i<Math.round(tt);i++)nodes.push(...click(start+i*b,i%beats===0?.4:.22));
+  run(nodes,start+tt*b,now=>{if(now<start)$(stEl).textContent=Array.from({length:Math.min(ci,Math.floor((now-t0)/b)+1)},(_,i)=>i%beats+1).join("  ")},onDone);
 }
 $("iplay").onclick=()=>{I.playing=-1;renderId();playCells(I.target,I.bpm,()=>{$("istatus").textContent=I.answer<0?t().idHint:t().idAfter})};
 $("ridOpts").onclick=e=>{const b=e.target.closest("button");if(!b)return;const i=+b.dataset.i;
@@ -863,11 +966,101 @@ $("ridOpts").onclick=e=>{const b=e.target.closest("button");if(!b)return;const i
     $("ifb").textContent=ok?t().ok:t().idBad;$("ifb").className="fb"+(ok?" ok":"");$("istatus").textContent=t().idAfter;renderId();return}
   I.playing=i;renderId();playCells(I.opts[i],I.bpm,()=>{I.playing=-1;renderId();$("istatus").textContent=t().idAfter})};
 $("inext").onclick=newId;
+$("ridTer").onclick=e=>{const b=e.target.closest("button");if(!b)return;I.ter=+b.dataset.v;store.set("ridTer",I.ter);newId()};
+$("ridOptN").onclick=e=>{const b=e.target.closest("button");if(!b)return;I.nopt=+b.dataset.v;store.set("ridOptN",I.nopt);newId()};
 $("ridN").oninput=e=>{I.n=+e.target.value;store.set("ridN",I.n);newId()};
 $("ibpm").value=I.bpm;$("ibpmOut").textContent=I.bpm;
 $("ibpm").oninput=e=>{I.bpm=+e.target.value;$("ibpmOut").textContent=I.bpm;store.set("ibpm",I.bpm)};
-function setRMode(m){stopAll();S.rmode=m;store.set("rmode",m);segSet("rmode",m);$("rpreBox").hidden=m!=="pre";$("ridBox").hidden=m!=="id";if(m==="id")newId()}
+function setRMode(m){stopAll();S.rmode=m;store.set("rmode",m);segSet("rmode",m);$("rpreBox").hidden=m!=="pre";$("ridBox").hidden=m!=="id";$("rbBox").hidden=m!=="build"&&m!=="err";B.err=m==="err";if(m==="id")newId();if(m==="build"||m==="err")newB()}
 $("rmode").onclick=e=>{const b=e.target.closest("button");if(b)setRMode(b.dataset.v)};
+
+/* ================= CONSTRUÍR RITMOS ================= */
+Object.assign(STR.gl,{showL:"Ver o escrito",showBefore:"Desde o inicio",showAfter:"Ao rematar",hiddenMsg:"Escoita primeiro: o escrito aparecerá cando remate.",rErr:"Erros",eHint:"O ritmo escrito ten {n} erro(s). Escoita, toca as células que non coinciden para quitalas e pon a correcta.",modeErr:"Erros",modeErrS:"erros",mErrHint:"A melodía escrita ten {n} erro(s). Escoita e corrixe as notas que non coinciden: toca o pentagrama ou usa o teclado.",errOk:"Atopaches todos os erros!",subdL:"Subdivisión",binS:"Binaria",terS:"Ternaria",optsL:"Opcións",optsS:"opcións",playBar:"Escoitar só o compás:",meterL:"Compás",barsL:"Compases",bHint2:"Escoita e constrúe o ritmo coas células de abaixo. A caixa amarela é onde vai a seguinte célula: toca outra caixa baleira para cambiala, ou toca unha célula do encerado para quitar só esa.",rBuild:"Construír",pulsesL:"Pulsos",pulsesS:"pulsos",bHint:"Escoita e constrúe o ritmo coas células de abaixo. Toca unha célula do encerado para quitala.",bBad:"Case! As células en rosa non coinciden."});
+Object.assign(STR.es,{showL:"Ver lo escrito",showBefore:"Desde el inicio",showAfter:"Al terminar",hiddenMsg:"Escucha primero: lo escrito aparecerá cuando termine.",rErr:"Errores",eHint:"El ritmo escrito tiene {n} error(es). Escucha, toca las células que no coinciden para quitarlas y pon la correcta.",modeErr:"Errores",modeErrS:"errores",mErrHint:"La melodía escrita tiene {n} error(es). Escucha y corrige las notas que no coinciden: toca el pentagrama o usa el teclado.",errOk:"¡Has encontrado todos los errores!",subdL:"Subdivisión",binS:"Binaria",terS:"Ternaria",optsL:"Opciones",optsS:"opciones",playBar:"Escuchar solo el compás:",meterL:"Compás",barsL:"Compases",bHint2:"Escucha y construye el ritmo con las células de abajo. La caja amarilla es donde va la siguiente célula: toca otra caja vacía para cambiarla, o toca una célula de la pizarra para quitar solo esa.",rBuild:"Construir",pulsesL:"Pulsos",pulsesS:"pulsos",bHint:"Escucha y construye el ritmo con las células de abajo. Toca una célula de la pizarra para quitarla.",bBad:"¡Casi! Las células en rosa no coinciden."});
+Object.assign(STR.ca,{showL:"Veure l’escrit",showBefore:"Des de l’inici",showAfter:"En acabar",hiddenMsg:"Escolta primer: l’escrit apareixerà quan acabi.",rErr:"Errors",eHint:"El ritme escrit té {n} error(s). Escolta, toca les cèl·lules que no coincideixen per treure-les i posa-hi la correcta.",modeErr:"Errors",modeErrS:"errors",mErrHint:"La melodia escrita té {n} error(s). Escolta i corregeix les notes que no coincideixen: toca el pentagrama o fes servir el teclat.",errOk:"Has trobat tots els errors!",subdL:"Subdivisió",binS:"Binària",terS:"Ternària",optsL:"Opcions",optsS:"opcions",playBar:"Escoltar només el compàs:",meterL:"Compàs",barsL:"Compassos",bHint2:"Escolta i construeix el ritme amb les cèl·lules de sota. La caixa groga és on va la cèl·lula següent: toca una altra caixa buida per canviar-la, o toca una cèl·lula de la pissarra per treure només aquesta.",rBuild:"Construir",pulsesL:"Pulsacions",pulsesS:"pulsacions",bHint:"Escolta i construeix el ritme amb les cèl·lules de sota. Toca una cèl·lula de la pissarra per treure-la.",bBad:"Gairebé! Les cèl·lules en rosa no coincideixen."});
+Object.assign(STR.eu,{showL:"Idatzia ikusi",showBefore:"Hasieratik",showAfter:"Amaitzean",hiddenMsg:"Entzun lehenik: idatzia amaitzean agertuko da.",rErr:"Akatsak",eHint:"Idatzitako erritmoak {n} akats ditu. Entzun, ukitu bat ez datozen zelulak kentzeko eta jarri zuzena.",modeErr:"Akatsak",modeErrS:"akatsak",mErrHint:"Idatzitako melodiak {n} akats ditu. Entzun eta zuzendu bat ez datozen notak: ukitu pentagrama edo erabili teklatua.",errOk:"Akats guztiak aurkitu dituzu!",subdL:"Zatiketa",binS:"Bitarra",terS:"Hirutarra",optsL:"Aukerak",optsS:"aukera",playBar:"Konpas hau bakarrik entzun:",meterL:"Konpasa",barsL:"Konpasak",bHint2:"Entzun eta eraiki erritmoa beheko zelulekin. Kutxa horia hurrengo zelula doan lekua da: ukitu beste kutxa huts bat aldatzeko, edo ukitu arbeleko zelula bat hori bakarrik kentzeko.",rBuild:"Eraiki",pulsesL:"Pultsuak",pulsesS:"pultsu",bHint:"Entzun eta eraiki erritmoa beheko zelulekin. Ukitu arbelaren zelula bat kentzeko.",bBad:"Ia! Arrosazko zelulak ez datoz bat."});
+const METERS={"2/4":{b:2,c:0},"3/4":{b:3,c:0},"4/4":{b:4,c:0},"6/8":{b:2,c:1},"9/8":{b:3,c:1},"12/8":{b:4,c:1}};
+const B={err:false,nErr:0,errShow:store.get("rerrShow",0),revealed:true,n:store.get("rbN",2),meter:store.get("rbM","2/4"),bars:store.get("rbBars",2),target:[],slots:[],cur:0,checked:false,counted:false};
+if(!METERS[B.meter])B.meter="2/4";
+const MT=()=>METERS[B.meter];
+const totalP=()=>MT().b*B.bars;
+function rbPool(){const list=MT().c?activeCCells():activeCells();return list.slice(0,Math.max(2,Math.min(B.n,list.length)))}
+function genBars(pool,beats,bars){
+  const basic=pool.find(id=>CL(id).p===1&&!CL(id).ev[0][1])||(MT().c?"dq":"q");
+  const newest=pool[pool.length-1];let out,g=0;
+  do{out=[];for(let k=0;k<bars;k++){let left=beats,gg=0;
+      while(left>0){const ok=pool.filter(id=>CL(id).p<=left);const id=ok.length&&gg++<40?ok[rnd(ok.length)]:basic;out.push(id);left-=CL(id).p}}
+  }while(g++<30&&(pool.length>2&&!out.includes(newest)&&Math.random()<.7||out.every(x=>x===out[0])&&pool.length>1&&Math.random()<.8||CL(out[0]).ev[0][1]&&Math.random()<.8));
+  return out}
+/* ocupación por pulsos: id onde empeza a célula, "-" se continúa, null se está baleiro */
+function toSlots(ids){const s=Array(totalP()).fill(null);let t=0;ids.forEach(id=>{s[t]=id;for(let k=1;k<CL(id).p;k++)s[t+k]="-";t+=CL(id).p});return s}
+const restId=()=>MT().c?"dqr":"qr";
+const seqOf=sl=>sl.map(x=>x===null?restId():x).filter(x=>x!=="-");
+const hasCells=()=>B.slots.some(x=>x&&x!=="-");
+function fits(id,i){const p=CL(id).p,b=MT().b;if(i<0||Math.floor(i/b)!==Math.floor((i+p-1)/b)||i+p>totalP())return false;
+  for(let k=0;k<p;k++)if(B.slots[i+k]!==null)return false;return true}
+function nextEmpty(from){const n=totalP();for(let k=0;k<n;k++){const i=(from+k)%n;if(B.slots[i]===null)return i}return -1}
+function cellsSvg(sl,marks,cur){
+  const {b,c}=MT(),pw=c?108:84,W=b*pw+22,X0=58,bpr=Math.max(1,Math.floor(4/b)),RH=92,rows=Math.ceil(B.bars/bpr);
+  const pos=t=>{const bar=Math.floor(t/b+1e-6),col=bar%bpr,row=Math.floor(bar/bpr);return{x:X0+col*W+18+(t-bar*b)*pw,y:row*RH}};
+  let s="";
+  for(let r=0;r<rows;r++){const n=Math.min(bpr,B.bars-r*bpr),w=X0+n*W;
+    s+=`<g transform="translate(0 ${r*RH})"><line class="nl" x1="${r?X0-8:6}" y1="${NL}" x2="${w}" y2="${NL}"/>`;
+    for(let k=1;k<=n;k++){const x=X0+k*W;s+=`<line class="nl" x1="${x}" y1="${NL-14}" x2="${x}" y2="${NL+14}" style="opacity:.85${k===n&&r===rows-1?";stroke-width:4":""}"/>`}
+    if(r===0){const [nu,de]=B.meter.split("/");s+=`<text class="tsig" x="30" y="${NL-3}">${nu}</text><text class="tsig" x="30" y="${NL+21}">${de}</text>`}
+    s+=`</g>`}
+  sl.forEach((id,i)=>{const p=pos(i);
+    if(id===null)s+=`<rect class="slotbox${i===cur?" cur":""}" data-e="${i}" x="${p.x-14}" y="${p.y+18}" width="${pw-10}" height="56" rx="8"/>`;
+    else if(id!=="-"){const cl=marks?(marks[i]?"ok":"bad"):"";
+      s+=`<g class="cg ${cl}" transform="translate(0 ${p.y})">${cellGlyphs(cellEvents(id,p.x,pw))}<rect class="hit" data-k="${i}" x="${p.x-16}" y="6" width="${CL(id).p*pw}" height="78"/></g>`}});
+  return{svg:s,w:X0+Math.min(bpr,B.bars)*W+8,h:rows*RH}}
+function drawSeq(el,sl,marks,cur){const c=cellsSvg(sl,marks,cur);el.setAttribute("viewBox",`0 0 ${Math.max(c.w,540)} ${c.h}`);el.innerHTML=c.svg}
+function renderB(){
+  const pool=rbPool(),list=MT().c?activeCCells():activeCells();
+  $("rbN").max=Math.max(2,list.length);$("rbN").value=Math.min(B.n,list.length);$("rbOut").textContent=pool.length;segSet("rbM",B.meter);segSet("rbBars",B.bars);
+  const ts=toSlots(B.target),marks=B.checked?B.slots.map((x,i)=>x===ts[i]):null;
+  drawSeq($("bseq"),B.revealed?B.slots:B.slots.map(()=>"-"),marks,B.cur);$("rErrShowWrap").style.display=B.err?"":"none";segSet("rerrShow",B.errShow);
+  $("bpal").innerHTML=pool.map(id=>`<button data-id="${id}" ${!B.revealed||B.cur<0||!fits(id,B.cur)?"disabled":""} aria-label="${cname(id)}">${notSvg([id],64)}</button>`).join("");
+  $("bbars").innerHTML=B.bars>1?`<span>${t().playBar}</span>`+Array.from({length:B.bars},(_,k)=>`<button data-bar="${k}">▶ ${k+1}</button>`).join(""):"";
+  $("bmine").disabled=!hasCells();$("bclear").disabled=!hasCells();
+}
+function mutateR(tg){
+  const pool=rbPool(),all=MT().c?activeCCells():activeCells(),n=tg.length,want=1+rnd(Math.max(1,Math.min(3,Math.floor(n/3))));
+  let best=null;for(let g=0;g<30;g++){const w=[...tg],idx=[...Array(n).keys()].sort(()=>Math.random()-.5);let c=0;
+    for(const i of idx){if(c>=want)break;let alt=pool.filter(id=>id!==w[i]&&CL(id).p===CL(w[i]).p);if(!alt.length)alt=all.filter(id=>id!==w[i]&&CL(id).p===CL(w[i]).p);
+      if(alt.length){w[i]=alt[rnd(alt.length)];c++}}
+    if(c&&(!best||c===want)){best={w,c};if(c===want)break}}
+  return best||{w:tg,c:0}}
+const bHintNow=()=>B.err?(B.revealed?fmt(t().eHint,{n:B.nErr}):t().hiddenMsg):t().bHint2;
+function newB(){stopAll();B.target=genBars(rbPool(),MT().b,B.bars);B.checked=false;B.counted=false;
+  if(B.err){let m=mutateR(B.target),g=0;while(!m.c&&g++<20){B.target=genBars(rbPool(),MT().b,B.bars);m=mutateR(B.target)}
+    B.slots=toSlots(m.w);B.nErr=m.c;B.cur=-1;B.revealed=!B.errShow}
+  else{B.revealed=true;B.slots=Array(totalP()).fill(null);B.cur=0}
+  updScore();$("bfb").textContent="";$("bshow").hidden=true;$("bsolbox").hidden=true;$("bstatus").textContent=bHintNow();renderB()}
+function bEdited(){if(B.checked){B.checked=false;$("bfb").textContent="";$("bshow").hidden=true}renderB()}
+$("bpal").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const id=b.dataset.id,i=B.cur;
+  B.slots[i]=id;for(let k=1;k<CL(id).p;k++)B.slots[i+k]="-";B.cur=nextEmpty(i+CL(id).p);bEdited()};
+$("bseq").addEventListener("click",e=>{if(!B.revealed)return;
+  const em=e.target.closest("[data-e]");if(em){B.cur=+em.dataset.e;renderB();return}
+  const r=e.target.closest("[data-k]");if(!r)return;const i=+r.dataset.k,p=CL(B.slots[i]).p;
+  for(let k=0;k<p;k++)B.slots[i+k]=null;B.cur=i;bEdited()});
+$("bplay").onclick=()=>playCells(B.target,I.bpm,ok=>{if(ok!==false&&!B.revealed){B.revealed=true;renderB()}$("bstatus").textContent=bHintNow()},"bstatus",MT().b);
+$("bmine").onclick=()=>playCells(seqOf(B.slots),I.bpm,()=>{$("bstatus").textContent=bHintNow()},"bstatus",MT().b);
+$("bclear").onclick=()=>{B.slots=Array(totalP()).fill(null);B.cur=0;bEdited()};
+$("bnext").onclick=newB;
+$("rerrShow").onclick=e=>{const b=e.target.closest("button");if(!b)return;B.errShow=+b.dataset.v;store.set("rerrShow",B.errShow);newB()};
+$("bbars").onclick=e=>{const x=e.target.closest("[data-bar]");if(!x)return;const k=+x.dataset.bar,b=MT().b;
+  playCells(seqOf(toSlots(B.target).slice(k*b,(k+1)*b)),I.bpm,()=>{$("bstatus").textContent=bHintNow()},"bstatus",b)};
+$("bcheck").onclick=()=>{
+  const ts=toSlots(B.target),ok=B.slots.every((x,i)=>x===ts[i]);B.checked=true;
+  if(!B.counted){B.counted=true;scoreUp(B.err?"re":"rb",ok)}
+  $("bfb").textContent=ok?(B.err?t().errOk:t().ok):t().bBad;$("bfb").className="fb"+(ok?" ok":"");$("bshow").hidden=ok;renderB()};
+$("bshow").onclick=()=>{$("bsolbox").hidden=false;drawSeq($("bsol"),toSlots(B.target),null,-1)};
+$("rbN").oninput=e=>{B.n=+e.target.value;store.set("rbN",B.n);newB()};
+$("rbM").onclick=e=>{const b=e.target.closest("button");if(!b)return;B.meter=b.dataset.v;store.set("rbM",B.meter);newB()};
+$("rbBars").onclick=e=>{const b=e.target.closest("button");if(!b)return;B.bars=+b.dataset.v;store.set("rbBars",B.bars);newB()};
+$("bbpm").value=I.bpm;$("bbpmOut").textContent=I.bpm;
+$("bbpm").oninput=e=>{I.bpm=+e.target.value;$("bbpmOut").textContent=I.bpm;$("ibpm").value=I.bpm;$("ibpmOut").textContent=I.bpm;store.set("ibpm",I.bpm)};
 
 /* ================= CAMIÑO ================= */
 const GOAL=4;
@@ -878,8 +1071,9 @@ const doneOf=i=>progOf(i)>=GOAL;
 const unlocked=i=>i===0||doneOf(i-1)||doneOf(i);
 function stageLabel(s){
   if(s.t==="rpre")return `${t().secR} · ${t().rPre} · ${t()["lv"+s.lv]}`;
-  if(s.t==="rid")return `${t().secR} · ${t().rId} · ${Math.min(s.n,activeCells().length)} ${t().cells}`;
-  return `${t().secM} · ${s.m==="live"?t().modeLiveS:t().modeMemS} · ${KEYDEFS[s.k].n} · ${t().level} ${s.lv}`}
+  if(s.t==="rid")return `${t().secR} · ${t().rId} · ${s.ter?t().terS:t().binS} · ${Math.min(s.n,(s.ter?activeCCells():activeCells()).length)} ${t().cells}`+(s.o&&s.o>4?` · ${s.o} ${t().optsS}`:"");
+  if(s.t==="rbuild"){const m=s.m||(s.pl===8?"4/4":"2/4"),L=METERS[m].c?activeCCells():activeCells();return `${t().secR} · ${s.err?t().rErr:t().rBuild} · ${m} · ${Math.min(s.n,L.length)} ${t().cells}`}
+  return `${t().secM} · ${s.m==="live"?t().modeLiveS:s.m==="err"?t().modeErrS:t().modeMemS} · ${KEYDEFS[s.k].n} · ${t().level} ${s.lv}`}
 const dots=i=>"●".repeat(Math.min(progOf(i),GOAL))+"○".repeat(Math.max(0,GOAL-progOf(i)));
 function renderPath(){
   $("pathIntro").textContent=fmt(t().pathIntro,{g:GOAL});
@@ -891,13 +1085,14 @@ function lockUI(on){document.querySelectorAll(".lk").forEach(el=>el.classList.to
 function startStage(i){
   const s=CFG.path[i];P.active=i;
   if(s.t==="rpre"){setSec("r",true);setRMode("pre");setLevel(s.lv)}
-  else if(s.t==="rid"){setSec("r",true);I.n=s.n;setRMode("id")}
-  else{setSec("m",true);M.pool=[s.k];M.custom=[null,null];M.level=s.lv;$("mlv").value=s.lv;M.count=s.lv<=4?5:6;segSet("mcount",M.count);buildKeys();setMMode(s.m)}
+  else if(s.t==="rid"){setSec("r",true);I.n=s.n;I.ter=s.ter?1:0;I.nopt=s.o||4;setRMode("id")}
+  else if(s.t==="rbuild"){setSec("r",true);B.n=s.n;B.meter=s.m||(s.pl===8?"4/4":"2/4");B.bars=s.bars||2;setRMode(s.err?"err":"build")}
+  else{setSec("m",true);M.pool=[s.k];M.custom=[null,null,null];M.level=s.lv;$("mlv").value=s.lv;M.count=s.lv<=4?5:6;segSet("mcount",M.count);buildKeys();setMMode(s.m)}
   lockUI(true);pathBar()}
 function exitPath(silent){
   P.active=null;lockUI(false);$("pbarR").hidden=true;$("pbarM").hidden=true;
-  I.n=store.get("ridN",2);M.pool=store.get("mpool",["C"]).filter(k=>KEYDEFS[k]);if(!M.pool.length)M.pool=["C"];
-  M.level=store.get("mlevel",1);M.custom=store.get("mcustom2",[null,null]);M.count=store.get("mcount",5);segSet("mcount",M.count);$("mlv").value=M.level;buildKeys();
+  I.n=store.get("ridN",2);I.ter=store.get("ridTer",0);I.nopt=store.get("ridOptN",4);B.n=store.get("rbN",2);B.meter=store.get("rbM","2/4");B.bars=store.get("rbBars",2);M.pool=store.get("mpool",["C"]).filter(k=>KEYDEFS[k]);if(!M.pool.length)M.pool=["C"];
+  M.level=store.get("mlevel",1);M.custom=store.get("mcustom2",[null,null,null]);M.count=store.get("mcount",5);segSet("mcount",M.count);$("mlv").value=M.level;buildKeys();
   setLevel(store.get("level",1));
   if(!silent){setSec("p")}}
 function pathBar(){
@@ -908,7 +1103,7 @@ function pathBar(){
   $("pbarR").innerHTML=html;$("pbarM").innerHTML=html}
 function pathHit(key,pass){
   if(P.active===null)return;const s=CFG.path[P.active];
-  const k=s.t==="rpre"?"r":s.t==="rid"?"rid":s.m;if(k!==key||doneOf(P.active))return;
+  const k=s.t==="rpre"?"r":s.t==="rid"?"rid":s.t==="rbuild"?(s.err?"re":"rb"):s.m;if(k!==key||doneOf(P.active))return;
   if(pass){P.prog[skey(s)]=progOf(P.active)+1;store.set("pathProg",P.prog)}
   pathBar()}
 ["pbarR","pbarM"].forEach(id=>$(id).onclick=e=>{const b=e.target.closest("button");if(!b)return;
@@ -917,13 +1112,18 @@ function pathHit(key,pass){
 /* ================= ADMIN ================= */
 function renderAdmin(){
   $("admCells").innerHTML=CFG.cells.map((c,i)=>`<li class="${c.on?"":"off"}"><button data-a="up" data-i="${i}" aria-label="↑">↑</button><button data-a="dn" data-i="${i}" aria-label="↓">↓</button>
-    <input type="checkbox" data-a="on" data-i="${i}" ${c.on?"checked":""}>${notSvg([c.id],64)}<span class="lab">${i+1}. ${CELLN[S.lang][c.id]}</span></li>`).join("");
+    <input type="checkbox" data-a="on" data-i="${i}" ${c.on?"checked":""}>${notSvg([c.id],64)}<span class="lab">${i+1}. ${cname(c.id)}</span></li>`).join("");
+  $("admCCells").innerHTML=CFG.ccells.map((c,i)=>`<li class="${c.on?"":"off"}"><button data-a="up" data-i="${i}" aria-label="↑">↑</button><button data-a="dn" data-i="${i}" aria-label="↓">↓</button>
+    <input type="checkbox" data-a="on" data-i="${i}" ${c.on?"checked":""}>${notSvg([c.id],64)}<span class="lab">${i+1}. ${cname(c.id)}</span></li>`).join("");
   $("admPath").innerHTML=CFG.path.map((s,i)=>`<li><button data-a="up" data-i="${i}" aria-label="↑">↑</button><button data-a="dn" data-i="${i}" aria-label="↓">↓</button>
     <span class="lab">${i+1}. ${stageLabel(s)}</span><button data-a="del" data-i="${i}" aria-label="✕">✕</button></li>`).join("")}
 function move(arr,i,d){const j=i+d;if(j<0||j>=arr.length)return;[arr[i],arr[j]]=[arr[j],arr[i]]}
 function admMsg(k){$("admMsg").textContent=t()[k];setTimeout(()=>{$("admMsg").textContent=""},2500)}
 $("admCells").onclick=e=>{const el=e.target.closest("[data-a]");if(!el)return;const i=+el.dataset.i,a=el.dataset.a;
   if(a==="up")move(CFG.cells,i,-1);else if(a==="dn")move(CFG.cells,i,1);else if(a==="on"){CFG.cells[i].on=el.checked;if(activeCells().length<2){CFG.cells[i].on=true}}
+  saveCfg();renderAdmin()};
+$("admCCells").onclick=e=>{const el=e.target.closest("[data-a]");if(!el)return;const i=+el.dataset.i,a=el.dataset.a;
+  if(a==="up")move(CFG.ccells,i,-1);else if(a==="dn")move(CFG.ccells,i,1);else if(a==="on"){CFG.ccells[i].on=el.checked;if(activeCCells().length<2){CFG.ccells[i].on=true}}
   saveCfg();renderAdmin()};
 $("admPath").onclick=e=>{const el=e.target.closest("[data-a]");if(!el)return;const i=+el.dataset.i,a=el.dataset.a;
   if(a==="up")move(CFG.path,i,-1);else if(a==="dn")move(CFG.path,i,1);else if(a==="del"&&CFG.path.length>1)CFG.path.splice(i,1);
@@ -933,7 +1133,7 @@ $("admProg").onclick=()=>{P.prog={};store.set("pathProg",P.prog);queueSync();adm
 $("admExport").onclick=()=>{const txt=JSON.stringify(CFG);
   (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>admMsg("admCopied")).catch(()=>{$("admImportBox").hidden=false;$("admText").value=txt;$("admText").select()})};
 $("admImportBtn").onclick=()=>{$("admImportBox").hidden=!$("admImportBox").hidden};
-$("admApply").onclick=()=>{try{const c=JSON.parse($("admText").value);if(!validCfg(c))throw 0;CFG=c;saveCfg();renderAdmin();admMsg("admDone")}catch(e){admMsg("admBad")}};
+$("admApply").onclick=()=>{try{const c=JSON.parse($("admText").value);if(!validCfg(c))throw 0;CFG=normCfg(c);saveCfg();renderAdmin();admMsg("admDone")}catch(e){admMsg("admBad")}};
 
 /* ================= SERVIDOR (Supabase · cousas · ofino_) ================= */
 Object.assign(STR.gl,{profile:"O teu perfil",nick:"Alcume",grupo:"Grupo",nickHint:"Non poñas o teu nome real: usa un alcume. O grupo dácho o teu profe.",saveP:"Gardar",ranking:"Clasificación",myGroup:"O meu grupo",all:"Xeral",noRank:"Aínda non hai ninguén.",offline:"Sen conexión co servidor.",stagesS:"etapas",hitsS:"acertos",saved:"Gardado.",nickShort:"O alcume ten que ter polo menos 2 letras.",admServer:"Gardar no servidor",admPlayers:"Alumnado",admPinBad:"PIN incorrecto.",sure:"Seguro?",admNote:"O orde e o itinerario gárdanse neste navegador. Co PIN podes gardalos no servidor para que lle cheguen a todo o alumnado."});
@@ -974,7 +1174,7 @@ $("pSave").onclick=async()=>{
 $("rkScope").onclick=e=>{const b=e.target.closest("button");if(!b)return;rkScope=b.dataset.v;store.set("rkScope",rkScope);renderRank()};
 /* configuración do servidor */
 async function loadServerCfg(){
-  try{const c=await rpc("ofino_get_config");if(validCfg(c)){CFG=c;CELL_ORDER.forEach(id=>{if(!CFG.cells.find(x=>x.id===id))CFG.cells.push({id,on:true})});saveCfg();
+  try{const c=await rpc("ofino_get_config");if(validCfg(c)){CFG=normCfg(c);saveCfg();
     if(!$("ridBox").hidden)newId();if(!$("secP").hidden)renderPath();if(!$("secA").hidden)renderAdmin()}}catch(e){}}
 $("admSrv").onclick=async()=>{try{const ok=await rpc("ofino_set_config",{p_pin:$("admPin").value,p_data:CFG});admMsg(ok?"saved":"admPinBad")}catch(e){admMsg("offline")}};
 async function renderPlayers(){
@@ -1026,10 +1226,11 @@ $("pulse").onchange=e=>{S.pulse=e.target.checked;store.set("pulse",S.pulse)};
 segSet("mcount",M.count);segSet("mheads",M.heads);
 setLevel([1,2,3,4].includes(S.level)?S.level:1);
 if(!(M.level>=1&&M.level<=8))M.level=1;$("mlv").value=M.level;buildKeys();
-setMMode(M.mode==="live"?"live":"mem");
-{const al0=applyLang;applyLang=function(){al0();if(!$("ridBox").hidden)renderId();if(!$("secP").hidden)renderPath();if(!$("secA").hidden)renderAdmin();if(!$("secP").hidden)renderRank();pathBar()}}
+setMMode(["live","err"].includes(M.mode)?M.mode:"mem");
+{const al0=applyLang;applyLang=function(){al0();if(!$("ridBox").hidden)renderId();if(!$("rbBox").hidden){renderB();if(!B.checked)$("bstatus").textContent=bHintNow()}if(!$("secP").hidden)renderPath();if(!$("secA").hidden)renderAdmin();if(!$("secP").hidden)renderRank();pathBar()}}
 checkAdminHash();loadServerCfg();
-S.rmode=store.get("rmode","pre");setRMode(S.rmode==="id"?"id":"pre");
+$("timbre").value=S.timbre;$("timbre").onchange=e=>{S.timbre=e.target.value;store.set("timbre",S.timbre);tone(ac().currentTime+.03,.5,523.25)};
+S.rmode=store.get("rmode","pre");setRMode(["id","build","err"].includes(S.rmode)?S.rmode:"pre");
 setSec(["p","r","m"].includes(S.sec)?S.sec:"r");if(location.hash==="#admin")setSec("a");
 applyLang();
 </script>
