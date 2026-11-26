@@ -94,8 +94,9 @@ header .snd select{font:inherit;color:var(--ink);background:var(--btn);border:1p
 .lang.open .menu{display:flex}
 .lang .menu button{border:0;background:none;padding:6px;border-radius:6px;display:flex}
 .flag{width:30px;height:20px;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
-.tabs{display:flex;gap:4px;margin:16px 0 0;border-bottom:2px solid var(--line)}
-.tabs button{border:0;background:none;padding:8px 14px 10px;font-family:"Gochi Hand",cursive;font-size:26px;line-height:1;color:var(--muted);border-bottom:4px solid transparent;margin-bottom:-2px}
+.tabs{display:flex;gap:2px;margin:16px 0 0;border-bottom:2px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs button{border:0;background:none;padding:8px 14px 10px;font-family:"Gochi Hand",cursive;font-size:26px;line-height:1;color:var(--muted);border-bottom:4px solid transparent;margin-bottom:-2px;flex:none}
+@media (max-width:560px){.tabs button{font-size:21px;padding:8px 8px 10px}}
 .tabs button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--accent)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--btn)}
 .seg button{border:0;background:none;padding:7px 12px;font-size:15px}
@@ -152,6 +153,18 @@ svg.sb{display:block;width:100%;height:auto;touch-action:none;user-select:none;-
 .fb.ok{color:var(--accent)}
 .solbox{margin-top:12px}
 .solbox h2{font-size:15px;color:var(--muted);margin:0 0 6px;font-weight:700}
+.sel{font:inherit;color:var(--ink);background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.dnotes{display:flex;align-items:stretch;gap:8px;margin-top:12px}
+.dnotes>button{border:1px solid var(--line);background:var(--btn);border-radius:10px;padding:0 14px;font-size:16px}
+.dkeys{flex:1;display:flex;flex-wrap:wrap;gap:6px}
+.dkeys button{flex:1 0 52px;border:1px solid var(--line);background:var(--key);color:var(--key-ink);border-radius:10px;padding:12px 4px;font-weight:700;font-size:15px}
+.dkeys button:disabled{opacity:.4}
+.dn.pend{opacity:.4}.dn.cur .head,.dn.cur .acc{fill:var(--chalk-y)}.dn.cur .nst{stroke:var(--chalk-y)}
+.dn.ok .head,.dn.ok .acc{fill:var(--chalk-g)}.dn.ok .nst{stroke:var(--chalk-g)}
+.dn.bad .head,.dn.bad .acc{fill:var(--chalk-p)}.dn.bad .nst{stroke:var(--chalk-p)}
+.dn.ghost .head,.dn.ghost .acc{fill:var(--chalk-y)}.dn.ghost{opacity:.75}.dn.ghost.no .head{fill:var(--chalk-p)}
+.dcell.bad .nrest{fill:var(--chalk-p)}.dcell.bad .nbm{stroke:var(--chalk-p)}
+#dstaff{cursor:crosshair}
 .ver{margin:28px 0 0;text-align:center;font-size:13px;color:var(--muted)}.ver b{color:var(--ink)}
 .hints{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:15px}
 .hints li{display:flex;align-items:center;gap:8px}
@@ -217,6 +230,7 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
     <button data-sec="p" data-i="secP"></button>
     <button data-sec="r" data-i="secR"></button>
     <button data-sec="m" data-i="secM"></button>
+    <button data-sec="d" data-i="secD"></button>
     <button data-sec="a" aria-label="Admin" class="gear" id="gearTab" hidden>⚙</button>
   </nav>
   <!-- ================= CAMIÑO ================= -->
@@ -413,11 +427,49 @@ svg.scale{width:300px;max-width:100%;height:auto;background:var(--board);border-
       <div class="frame"><div class="board"><svg class="sb" id="msol" viewBox="0 0 800 172"></svg></div></div>
     </div>
   </section>
-  <footer class="ver">Oído Fino · versión <b id="appVer">1.19 · 23/11/2026</b> · by ancho</footer>
+  <!-- ================= DITADO ================= -->
+  <section id="secD" hidden>
+    <div class="pathbar" id="pbarD" hidden></div>
+    <div class="score"><span><span data-i="score"></span> <b id="dsc">0/0</b></span><span><span data-i="streak"></span> <b id="dsk">0</b></span></div>
+    <div class="opts lk" id="dSet" style="margin-top:14px">
+      <label><span data-i="dKey"></span> <select id="dKey" class="sel"></select></label>
+      <label class="lvl"><span data-i="level"></span> <b id="dLvOut">3</b><input type="range" id="dLv" min="1" max="8" step="1"></label>
+      <label><span data-i="meterL"></span> <span class="seg" id="dM"><button data-v="2/4">2/4</button><button data-v="3/4">3/4</button><button data-v="4/4">4/4</button><button data-v="6/8">6/8</button><button data-v="9/8">9/8</button><button data-v="12/8">12/8</button></span></label>
+      <label><span data-i="barsL"></span> <span class="seg" id="dBars"><button data-v="1">1</button><button data-v="2">2</button><button data-v="4">4</button></span></label>
+      <label class="lvl"><span data-i="cellsL"></span> <b id="dNOut">3</b><input type="range" id="dN" min="2" max="15" step="1"></label>
+    </div>
+    <div class="frame"><div class="board">
+      <div class="status" id="dstatus"></div>
+      <svg class="sb" id="dstaff" viewBox="0 0 540 150"></svg>
+    </div></div>
+    <div class="barplay" id="dbars"></div>
+    <div class="palette" id="dpal"></div>
+    <div class="dnotes"><button id="dprev" aria-label="◀">◀</button><div class="dkeys" id="dkeys"></div><button id="dnext" aria-label="▶">▶</button></div>
+    <p class="mhint" data-i="dHelp"></p>
+    <div class="row">
+      <button class="btn primary big" id="dplay">▶ <span data-i="play"></span></button>
+      <button class="btn" id="dmine"><span data-i="mine"></span></button>
+      <label class="tempo"><span data-i="tempo"></span> <input type="range" id="dbpm" min="40" max="120" step="5"><output id="dbpmOut"></output></label>
+    </div>
+    <div class="row">
+      <button class="btn" id="ddel"><span data-i="dDel"></span></button>
+      <button class="btn" id="dclear"><span data-i="clear"></span></button>
+      <span class="spacer"></span>
+      <button class="btn" id="dshow" hidden><span data-i="sol"></span></button>
+      <button class="btn primary" id="dcheck"><span data-i="check"></span></button>
+      <button class="btn" id="dnew"><span data-i="next"></span></button>
+    </div>
+    <p class="fb" id="dfb" aria-live="polite"></p>
+    <div class="solbox" id="dsolbox" hidden>
+      <h2 data-i="solTitle"></h2>
+      <div class="frame"><div class="board"><svg class="sb" id="dsol" viewBox="0 0 540 150"></svg></div></div>
+    </div>
+  </section>
+  <footer class="ver">Oído Fino · versión <b id="appVer">1.20 · 26/11/2026</b> · by ancho</footer>
 </div>
 
 <script>
-const APP_VERSION="1.19 · 23/11/2026";
+const APP_VERSION="1.20 · 26/11/2026";
 const STR={
  gl:{app:"Oído Fino",secR:"Ritmo",secM:"Melodía",lv1:"Negras e silencios",lv2:"Con brancas",lv3:"Con corcheas",lv4:"Todo xunto",play:"Escoitar",mine:"Escoitar a miña",tempo:"Tempo",pulse:"Marcar o pulso",clear:"Borrar todo",check:"Comprobar",next:"Novo exercicio",sol:"Ver solución",solTitle:"Solución",ok:"Ben feito!",bad:"Case! Revisa os palitos marcados en rosa.",hScratch:"Risca un palito dun lado ao outro: silencio",hTie:"Arrastra dun palito ao seguinte: branca",hTap:"Toca un palito: dúas corcheas",hUndo:"Repite o xesto para desfacelo",score:"Acertos",streak:"Racha",ready:"Escoita e marca o que oes",listening:"Escoitando…",
   modeMem:"De memoria",modeLive:"Ao momento",sounds:"Sons",heads:"Cabezas",hW:"Redondas",hQ:"Negras",input:"Escribir con",inBtn:"Botóns",inKb:"Teclado",inSt:"Pentagrama",undo:"Borrar a última",melReady:"Preme Escoitar para comezar",refPlay:"Nota de referencia…",memWait:"Escoita sen escribir…",memWrite:"Agora escribe o que lembras",liveGo:"Escribe mentres soa",liveEnd:"Remata e comproba",partial:"{a} de {b} correctas. Revisa as rosas."},
@@ -442,7 +494,7 @@ const fmt=(s,o)=>s.replace(/\{(\w)\}/g,(_,k)=>o[k]);
 
 const S={lang:store.get("lang","gl"),sec:store.get("sec","r"),level:store.get("level",1),bpm:store.get("bpm",80),pulse:store.get("pulse",true),
  target:null,user:null,checked:false,counted:false,
- sc:{r:{s:0,t:0,k:0},rid:{s:0,t:0,k:0},rb:{s:0,t:0,k:0},re:{s:0,t:0,k:0},err:{s:0,t:0,k:0},mem:{s:0,t:0,k:0},live:{s:0,t:0,k:0}}};
+ sc:{r:{s:0,t:0,k:0},rid:{s:0,t:0,k:0},rb:{s:0,t:0,k:0},re:{s:0,t:0,k:0},err:{s:0,t:0,k:0},dit:{s:0,t:0,k:0},mem:{s:0,t:0,k:0},live:{s:0,t:0,k:0}}};
 if(!STR[S.lang])S.lang="gl";
 const t=()=>STR[S.lang];
 const chalkDefs=id=>`<defs><filter id="ch-${id}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5"/></filter></defs>`;
@@ -912,15 +964,15 @@ function notate(ids,pw=84){
 const notSvg=(ids,pw)=>{const n=notate(ids,pw);return `<svg viewBox="0 0 ${n.w} ${n.h}" aria-hidden="true">${n.svg}</svg>`};
 /* configuración (admin) */
 const PATH_DEF=[{t:"rpre",lv:1},{t:"mel",m:"mem",k:"C",lv:1},{t:"rid",n:2},{t:"rbuild",n:2,m:"2/4",bars:2},{t:"rpre",lv:2},{t:"mel",m:"mem",k:"C",lv:2},{t:"rid",n:3},{t:"rpre",lv:3},
- {t:"mel",m:"mem",k:"C",lv:3},{t:"rid",n:4},{t:"rpre",lv:4},{t:"mel",m:"live",k:"C",lv:3},{t:"mel",m:"mem",k:"C",lv:4},{t:"rid",n:5},{t:"rbuild",n:5,m:"3/4",bars:2},{t:"rbuild",n:5,m:"2/4",bars:2,err:1},{t:"mel",m:"err",k:"C",lv:5},{t:"mel",m:"mem",k:"C",lv:5},
+ {t:"mel",m:"mem",k:"C",lv:3},{t:"rid",n:4},{t:"rpre",lv:4},{t:"mel",m:"live",k:"C",lv:3},{t:"mel",m:"mem",k:"C",lv:4},{t:"rid",n:5},{t:"rbuild",n:5,m:"3/4",bars:2},{t:"rbuild",n:5,m:"2/4",bars:2,err:1},{t:"mel",m:"err",k:"C",lv:5},{t:"dit",k:"C",lv:3,m:"2/4",bars:2,n:3},{t:"mel",m:"mem",k:"C",lv:5},
  {t:"rid",n:6},{t:"mel",m:"mem",k:"C",lv:6},{t:"mel",m:"live",k:"C",lv:5},{t:"rid",n:7},{t:"mel",m:"mem",k:"C",lv:7},{t:"rid",n:8},{t:"rbuild",n:8,m:"4/4",bars:2},{t:"rbuild",n:8,m:"4/4",bars:2,err:1},{t:"rbuild",n:3,m:"6/8",bars:2},{t:"mel",m:"err",k:"a",lv:7},{t:"mel",m:"mem",k:"a",lv:4},
  {t:"rid",n:9},{t:"rid",n:3,ter:1},{t:"mel",m:"mem",k:"a",lv:7},{t:"mel",m:"live",k:"C",lv:7},{t:"rid",n:10},{t:"rid",n:7,ter:1},{t:"mel",m:"mem",k:"G",lv:7},{t:"mel",m:"mem",k:"F",lv:7},
- {t:"rid",n:12},{t:"rbuild",n:12,m:"4/4",bars:2},{t:"rbuild",n:7,m:"9/8",bars:2},{t:"mel",m:"mem",k:"e",lv:7},{t:"mel",m:"mem",k:"d",lv:7},{t:"rid",n:15,o:6},{t:"rid",n:13,ter:1,o:6},{t:"rbuild",n:15,m:"4/4",bars:2},{t:"rbuild",n:13,m:"12/8",bars:2},{t:"rbuild",n:13,m:"6/8",bars:4,err:1}];
+ {t:"rid",n:12},{t:"rbuild",n:12,m:"4/4",bars:2},{t:"rbuild",n:7,m:"9/8",bars:2},{t:"mel",m:"mem",k:"e",lv:7},{t:"mel",m:"mem",k:"d",lv:7},{t:"rid",n:15,o:6},{t:"rid",n:13,ter:1,o:6},{t:"rbuild",n:15,m:"4/4",bars:2},{t:"rbuild",n:13,m:"12/8",bars:2},{t:"rbuild",n:13,m:"6/8",bars:4,err:1},{t:"dit",k:"C",lv:7,m:"3/4",bars:2,n:6},{t:"dit",k:"a",lv:7,m:"4/4",bars:2,n:8},{t:"dit",k:"G",lv:7,m:"6/8",bars:2,n:4}];
 const cfgDefault=()=>({cells:CELL_ORDER.map(id=>({id,on:true})),ccells:CCELL_ORDER.map(id=>({id,on:true})),path:JSON.parse(JSON.stringify(PATH_DEF))});
 function normCfg(c){if(!Array.isArray(c.ccells))c.ccells=[];c.ccells=c.ccells.filter(x=>CCELLS[x.id]);
   CELL_ORDER.forEach(id=>{if(!c.cells.find(x=>x.id===id))c.cells.push({id,on:true})});
   CCELL_ORDER.forEach(id=>{if(!c.ccells.find(x=>x.id===id))c.ccells.push({id,on:true})});return c}
-function validCfg(c){return c&&Array.isArray(c.cells)&&Array.isArray(c.path)&&c.cells.every(x=>CL(x.id))&&c.path.every(s=>["rpre","rid","rbuild","mel"].includes(s.t)&&(s.t!=="mel"||KEYDEFS[s.k]))}
+function validCfg(c){return c&&Array.isArray(c.cells)&&Array.isArray(c.path)&&c.cells.every(x=>CL(x.id))&&c.path.every(s=>["rpre","rid","rbuild","mel","dit"].includes(s.t)&&(s.t!=="mel"&&s.t!=="dit"||KEYDEFS[s.k]))}
 let CFG=store.get("cfg",null);if(!validCfg(CFG))CFG=cfgDefault();
 normCfg(CFG);
 const saveCfg=()=>store.set("cfg",CFG);
@@ -1070,6 +1122,7 @@ const progOf=i=>P.prog[skey(CFG.path[i])]||0;
 const doneOf=i=>progOf(i)>=GOAL;
 const unlocked=i=>i===0||doneOf(i-1)||doneOf(i);
 function stageLabel(s){
+  if(s.t==="dit")return `${t().secD} · ${KEYDEFS[s.k].n} · ${s.m} · ${t().level} ${s.lv}`;
   if(s.t==="rpre")return `${t().secR} · ${t().rPre} · ${t()["lv"+s.lv]}`;
   if(s.t==="rid")return `${t().secR} · ${t().rId} · ${s.ter?t().terS:t().binS} · ${Math.min(s.n,(s.ter?activeCCells():activeCells()).length)} ${t().cells}`+(s.o&&s.o>4?` · ${s.o} ${t().optsS}`:"");
   if(s.t==="rbuild"){const m=s.m||(s.pl===8?"4/4":"2/4"),L=METERS[m].c?activeCCells():activeCells();return `${t().secR} · ${s.err?t().rErr:t().rBuild} · ${m} · ${Math.min(s.n,L.length)} ${t().cells}`}
@@ -1087,26 +1140,27 @@ function startStage(i){
   if(s.t==="rpre"){setSec("r",true);setRMode("pre");setLevel(s.lv)}
   else if(s.t==="rid"){setSec("r",true);I.n=s.n;I.ter=s.ter?1:0;I.nopt=s.o||4;setRMode("id")}
   else if(s.t==="rbuild"){setSec("r",true);B.n=s.n;B.meter=s.m||(s.pl===8?"4/4":"2/4");B.bars=s.bars||2;setRMode(s.err?"err":"build")}
+  else if(s.t==="dit"){setSec("d",true);Object.assign(D,{key:s.k,lv:s.lv,meter:s.m,bars:s.bars||2,n:s.n||3});newD()}
   else{setSec("m",true);M.pool=[s.k];M.custom=[null,null,null];M.level=s.lv;$("mlv").value=s.lv;M.count=s.lv<=4?5:6;segSet("mcount",M.count);buildKeys();setMMode(s.m)}
   lockUI(true);pathBar()}
 function exitPath(silent){
-  P.active=null;lockUI(false);$("pbarR").hidden=true;$("pbarM").hidden=true;
-  I.n=store.get("ridN",2);I.ter=store.get("ridTer",0);I.nopt=store.get("ridOptN",4);B.n=store.get("rbN",2);B.meter=store.get("rbM","2/4");B.bars=store.get("rbBars",2);M.pool=store.get("mpool",["C"]).filter(k=>KEYDEFS[k]);if(!M.pool.length)M.pool=["C"];
+  P.active=null;lockUI(false);$("pbarR").hidden=true;$("pbarM").hidden=true;$("pbarD").hidden=true;
+  dLoad();I.n=store.get("ridN",2);I.ter=store.get("ridTer",0);I.nopt=store.get("ridOptN",4);B.n=store.get("rbN",2);B.meter=store.get("rbM","2/4");B.bars=store.get("rbBars",2);M.pool=store.get("mpool",["C"]).filter(k=>KEYDEFS[k]);if(!M.pool.length)M.pool=["C"];
   M.level=store.get("mlevel",1);M.custom=store.get("mcustom2",[null,null,null]);M.count=store.get("mcount",5);segSet("mcount",M.count);$("mlv").value=M.level;buildKeys();
   setLevel(store.get("level",1));
   if(!silent){setSec("p")}}
 function pathBar(){
-  const on=P.active!==null;["pbarR","pbarM"].forEach(id=>$(id).hidden=!on);if(!on)return;
+  const on=P.active!==null;["pbarR","pbarM","pbarD"].forEach(id=>$(id).hidden=!on);if(!on)return;
   const i=P.active,s=CFG.path[i],d=doneOf(i),nxt=i+1<CFG.path.length;
   const html=`<span>🧭 <b>${t().stage} ${i+1}</b> · ${stageLabel(s)}</span><span class="dots">${dots(i)}</span><span class="spacer"></span>`+
     (d?`<b>${t().passed}</b>`+(nxt?`<button class="btn primary" data-act="next">${t().nextStage}</button>`:""):"")+`<button class="btn" data-act="exit">${t().exit}</button>`;
-  $("pbarR").innerHTML=html;$("pbarM").innerHTML=html}
+  $("pbarR").innerHTML=html;$("pbarM").innerHTML=html;$("pbarD").innerHTML=html}
 function pathHit(key,pass){
   if(P.active===null)return;const s=CFG.path[P.active];
-  const k=s.t==="rpre"?"r":s.t==="rid"?"rid":s.t==="rbuild"?(s.err?"re":"rb"):s.m;if(k!==key||doneOf(P.active))return;
+  const k=s.t==="dit"?"dit":s.t==="rpre"?"r":s.t==="rid"?"rid":s.t==="rbuild"?(s.err?"re":"rb"):s.m;if(k!==key||doneOf(P.active))return;
   if(pass){P.prog[skey(s)]=progOf(P.active)+1;store.set("pathProg",P.prog)}
   pathBar()}
-["pbarR","pbarM"].forEach(id=>$(id).onclick=e=>{const b=e.target.closest("button");if(!b)return;
+["pbarR","pbarM","pbarD"].forEach(id=>$(id).onclick=e=>{const b=e.target.closest("button");if(!b)return;
   if(b.dataset.act==="exit")exitPath(false);else if(b.dataset.act==="next")startStage(P.active+1)});
 
 /* ================= ADMIN ================= */
@@ -1189,6 +1243,170 @@ $("admPlayers").onclick=async e=>{const b=e.target.closest("[data-del]");if(!b)r
 function checkAdminHash(){if(location.hash==="#admin")$("gearTab").hidden=false}
 window.addEventListener("hashchange",checkAdminHash);
 
+/* ================= DITADO ================= */
+Object.assign(STR.gl,{secD:"Ditado",dKey:"Tonalidade",dHint:"Escoita. Constrúe o ritmo coas células e dálle altura a cada nota.",dHelp:"A caixa amarela é onde vai a seguinte célula. A nota marcada en amarelo recibe a altura: tócaa no pentagrama ou co botón do seu nome. ◀ ▶ cambian de nota.",dRes:"Ritmo: {a}/{b} células · Notas: {c}/{d}",dDel:"Quitar célula"});
+Object.assign(STR.es,{secD:"Dictado",dKey:"Tonalidad",dHint:"Escucha. Construye el ritmo con las células y dale altura a cada nota.",dHelp:"La caja amarilla es donde va la siguiente célula. La nota marcada en amarillo recibe la altura: tócala en el pentagrama o con el botón de su nombre. ◀ ▶ cambian de nota.",dRes:"Ritmo: {a}/{b} células · Notas: {c}/{d}",dDel:"Quitar célula"});
+Object.assign(STR.ca,{secD:"Dictat",dKey:"Tonalitat",dHint:"Escolta. Construeix el ritme amb les cèl·lules i dona alçada a cada nota.",dHelp:"La caixa groga és on va la cèl·lula següent. La nota marcada en groc rep l’alçada: toca-la al pentagrama o amb el botó del seu nom. ◀ ▶ canvien de nota.",dRes:"Ritme: {a}/{b} cèl·lules · Notes: {c}/{d}",dDel:"Treure cèl·lula"});
+Object.assign(STR.eu,{secD:"Diktaketa",dKey:"Tonalitatea",dHint:"Entzun. Eraiki erritmoa zelulekin eta eman altuera nota bakoitzari.",dHelp:"Kutxa horia hurrengo zelula doan lekua da. Horiz markatutako notak hartzen du altuera: ukitu pentagraman edo bere izenaren botoian. ◀ ▶ notaz aldatzeko.",dRes:"Erritmoa: {a}/{b} zelula · Notak: {c}/{d}",dDel:"Zelula kendu"});
+const D={tS:[],tP:{},slots:[],pit:{},cur:0,ncur:null,checked:false,counted:false,ghost:null,lay:null};
+function dLoad(){D.key=store.get("dKey","C");if(!KEYDEFS[D.key])D.key="C";D.lv=store.get("dLv",3);D.meter=store.get("dM","2/4");if(!METERS[D.meter])D.meter="2/4";
+  D.bars=store.get("dBars",2);D.n=store.get("dN",3);D.bpm=store.get("dBpm",60)}
+dLoad();
+const DK=()=>KEYDEFS[D.key],DMT=()=>METERS[D.meter],dTot=()=>DMT().b*D.bars;
+function dNotes(){const kd=DK(),L=LV[kd.min];return [...new Set((L[Math.min(D.lv,8)]||L[7]).map(d=>degId(kd,d)))].sort((a,b)=>midiId(a)-midiId(b))}
+const dList=()=>DMT().c?activeCCells():activeCells();
+const dPool=()=>dList().slice(0,Math.max(2,Math.min(D.n,dList().length)));
+function slotsOf(ids,total){const s=Array(total).fill(null);let t=0;ids.forEach(id=>{s[t]=id;for(let k=1;k<CL(id).p;k++)s[t+k]="-";t+=CL(id).p});return s}
+function noteKeys(sl){const out=[];sl.forEach((id,i)=>{if(id&&id!=="-")CL(id).ev.forEach((e,k)=>{if(!e[1])out.push(i+":"+k)})});return out}
+function pickW(c,w){let s=w.reduce((a,b)=>a+b,0),r=Math.random()*s;for(let i=0;i<c.length;i++){r-=w[i];if(r<=0)return c[i]}return c[c.length-1]}
+function genPitches(keys){
+  const al=dNotes(),kd=DK(),ton=degId(kd,"1"),starts=["1","3","5"].map(d=>degId(kd,d)).filter(x=>al.includes(x)),res={};
+  let prev=starts.length?starts[rnd(starts.length)]:al[rnd(al.length)];
+  keys.forEach((k,j)=>{let p=prev;
+    if(j>0){let c=al.filter(x=>x!==prev&&Math.abs(midiId(x)-midiId(prev))<=7);if(!c.length)c=al;
+      p=Math.random()<.15?prev:pickW(c,c.map(x=>1/Math.abs(midiId(x)-midiId(prev))))}
+    if(j===keys.length-1&&j>0&&al.includes(ton)&&Math.abs(midiId(ton)-midiId(prev))<=7)p=ton;
+    res[k]=p;prev=p});
+  return res}
+function dFits(id,i){const p=CL(id).p,b=DMT().b;if(i<0||Math.floor(i/b)!==Math.floor((i+p-1)/b)||i+p>dTot())return false;
+  for(let k=0;k<p;k++)if(D.slots[i+k]!==null)return false;return true}
+function dNextEmpty(from){const n=dTot();for(let k=0;k<n;k++){const i=(from+k)%n;if(D.slots[i]===null)return i}return -1}
+/* debuxo no pentagrama */
+const DRH=128,dY=(st,r)=>r*DRH+88-(st-2)*5;
+function dHead(e,y,r){let h="";const st=e.st;
+  for(let l=0;l>=st;l-=2)h+=`<line class="ledger" x1="${e.x-11}" y1="${dY(l,r)}" x2="${e.x+11}" y2="${dY(l,r)}"/>`;
+  for(let l=12;l<=st;l+=2)h+=`<line class="ledger" x1="${e.x-11}" y1="${dY(l,r)}" x2="${e.x+11}" y2="${dY(l,r)}"/>`;
+  if(e.acc!==null&&e.acc!==undefined)h+=accG(e.acc,e.x-15,y,9.5);
+  h+=`<ellipse class="head" cx="${e.x}" cy="${y}" rx="6.3" ry="4.6" transform="rotate(-20 ${e.x} ${y})"/>`;
+  if(e.d>=2)h+=`<ellipse class="hole" cx="${e.x}" cy="${y}" rx="3.9" ry="2.1" transform="rotate(-20 ${e.x} ${y})"/>`;
+  if(e.d===1.5||e.d===3||e.d===.75)h+=`<circle class="head" cx="${e.x+10}" cy="${st%2===0?y-2.5:y}" r="1.8"/>`;
+  return h}
+function dRest(e,r){const y=e.d===4?dY(8,r):dY(6,r);return `<g transform="translate(${e.x} ${y}) scale(.78) translate(${-e.x} ${-NL})">${restS(e.x,e.d)}</g>`}
+function dCell(evs,r){
+  let s="";const groups=[];let g=[];const flush=()=>{if(g.length)groups.push(g);g=[]};
+  evs.forEach(e=>{if(!e.r&&e.d<1)g.push(e);else{flush();if(!e.r)groups.push([e])}});flush();
+  evs.filter(e=>e.r).forEach(e=>{s+=dRest(e,r)});
+  groups.forEach(gr=>{
+    const up=gr.reduce((a,e)=>a+e.st,0)/gr.length<6,ys=gr.map(e=>dY(e.st,r)),beam=gr.length>1;
+    const by=beam?(up?Math.min(...ys)-30:Math.max(...ys)+30):0,sx=e=>up?e.x+5.5:e.x-5.5;
+    gr.forEach((e,i)=>{const y=ys[i];s+=`<g class="dn ${e.cls||""}">`+dHead(e,y,r);
+      if(e.d<4){const ye=beam?by:(up?y-32:y+32);s+=`<line class="nst" x1="${sx(e)}" y1="${y+(up?-1:1)}" x2="${sx(e)}" y2="${ye}"/>`;
+        if(!beam&&e.d<1){const f=up?1:-1;s+=`<path class="nfl" d="M${sx(e)} ${ye} q3 ${9*f} 9 ${12*f} q4 ${4*f} 1 ${13*f}"/>`;
+          if(e.d===.25)s+=`<path class="nfl" d="M${sx(e)} ${ye+7*f} q3 ${9*f} 9 ${12*f} q4 ${4*f} 1 ${13*f}"/>`}}
+      s+=`</g>`});
+    if(beam){const f=up?1:-1;s+=`<line class="nbm" x1="${sx(gr[0])-1}" y1="${by}" x2="${sx(gr[gr.length-1])+1}" y2="${by}"/>`;
+      gr.forEach((e,i)=>{if(e.d!==.25)return;const nx=gr[i+1],pv=gr[i-1],y2=by+7*f;
+        if(nx&&nx.d===.25)s+=`<line class="nbm" x1="${sx(e)-1}" y1="${y2}" x2="${sx(nx)+1}" y2="${y2}"/>`;
+        else if(!(pv&&pv.d===.25))s+=pv?`<line class="nbm" x1="${sx(e)-8}" y1="${y2}" x2="${sx(e)+1}" y2="${y2}"/>`:`<line class="nbm" x1="${sx(e)-1}" y1="${y2}" x2="${sx(e)+8}" y2="${y2}"/>`})}
+  });
+  return s}
+function dSvg(svg,sl,pit,opt={}){
+  const kd=DK(),{b,c}=DMT(),pw=c?108:84,W=b*pw+22,ks=keySig(42,st=>dY(st,0),10,kd),X0=48+ks.w+26,lay={notes:[],X0,pw};
+  const avail=(svg.parentElement&&svg.parentElement.clientWidth)||($("dstaff").parentElement.clientWidth)||600;
+  const bpr=Math.max(1,Math.min(D.bars,Math.floor(8/b),Math.floor((Math.max(320,avail*1.1)-X0)/W))),rows=Math.ceil(D.bars/bpr);
+  const pos=t=>{const bar=Math.floor(t/b+1e-6),col=bar%bpr,row=Math.floor(bar/bpr);return{x:X0+col*W+18+(t-bar*b)*pw,r:row,bar}};
+  const ts=opt.marks?slotsOf(D.tR,dTot()):null;
+  let s=chalkDefs(svg.id)+`<g filter="url(#ch-${svg.id})">`;
+  for(let r=0;r<rows;r++){const n=Math.min(bpr,D.bars-r*bpr),w=X0+n*W;
+    for(let st=2;st<=10;st+=2)s+=`<line class="sl" x1="6" y1="${dY(st,r)}" x2="${w}" y2="${dY(st,r)}"/>`;
+    s+=clef(14,dY(4,r),10)+keySig(42,st=>dY(st,r),10,kd).svg;
+    for(let k=1;k<=n;k++){const x=X0+k*W;s+=`<line class="sl" x1="${x}" y1="${dY(10,r)}" x2="${x}" y2="${dY(2,r)}" style="${k===n&&r===rows-1?"stroke-width:4":""}"/>`}
+    if(r===0){const [nu,de]=D.meter.split("/");s+=`<text class="tsig" style="font-size:19px" x="${X0-14}" y="${dY(8,0)+7}">${nu}</text><text class="tsig" style="font-size:19px" x="${X0-14}" y="${dY(4,0)+7}">${de}</text>`}}
+  let curA={},lastBar=-1;
+  sl.forEach((id,i)=>{const p=pos(i);
+    if(id===null){s+=`<rect class="slotbox${i===opt.cur?" cur":""}" data-e="${i}" x="${p.x-14}" y="${p.r*DRH+44}" width="${pw-10}" height="52" rx="8"/>`;return}
+    if(id==="-")return;
+    if(p.bar!==lastBar){curA={};lastBar=p.bar}
+    const cellBad=ts&&ts[i]!==id;
+    const evs=cellEvents(id,p.x,pw).map((e,k)=>{const key=i+":"+k;if(e.r)return e;
+      const g=opt.ghost&&opt.ghost.key===key?opt.ghost.id:null,pid=g||pit[key]||null;
+      let st=6,acc=null,cls=pid?"":"pend";
+      if(pid){st=pst(pid);const a=palt(pid),cu=st in curA?curA[st]:(kd.sig[li7(st)]||0);acc=a!==cu?a:null;if(!g)curA[st]=a}
+      if(g)cls="ghost"+(dNotes().includes(g)?"":" no");
+      else if(opt.marks)cls=(!cellBad&&pid===D.tP[key])?"ok":"bad";
+      if(key===opt.ncur&&!opt.marks)cls+=" cur";
+      lay.notes.push({key,x:e.x,r:p.r});
+      return Object.assign({},e,{st,acc,cls,key})});
+    if(opt.ncur&&!opt.marks)evs.filter(e=>e.key&&e.key===opt.ncur).forEach(e=>{s+=`<rect class="colhl" x="${e.x-15}" y="${p.r*DRH+16}" width="30" height="100" rx="7"/>`});
+    s+=`<g class="dcell${cellBad?" bad":""}">${dCell(evs,p.r)}</g>`});
+  svg.setAttribute("viewBox",`0 0 ${X0+bpr*W+8} ${rows*DRH}`);
+  svg.innerHTML=s+`</g>`;if(opt.store)D.lay=lay}
+/* estado e interface */
+const dHint=()=>t().dHint;
+function dKeysOrder(){return noteKeys(D.slots)}
+function dFixCursor(){const ks=dKeysOrder();if(!ks.includes(D.ncur))D.ncur=ks.find(k=>!D.pit[k])||ks[0]||null}
+function renderD(){
+  const pool=dPool();
+  $("dLvOut").textContent=D.lv;$("dLv").value=D.lv;$("dNOut").textContent=pool.length;$("dN").max=Math.max(2,dList().length);$("dN").value=Math.min(D.n,dList().length);
+  segSet("dM",D.meter);segSet("dBars",D.bars);$("dKey").value=D.key;$("dbpm").value=D.bpm;$("dbpmOut").textContent=D.bpm;
+  dFixCursor();
+  dSvg($("dstaff"),D.slots,D.pit,{cur:D.cur,ncur:D.ncur,ghost:D.ghost,marks:D.checked,store:true});
+  $("dpal").innerHTML=pool.map(id=>`<button data-id="${id}" ${D.cur<0||!dFits(id,D.cur)?"disabled":""} aria-label="${cname(id)}">${notSvg([id],64)}</button>`).join("");
+  $("dkeys").innerHTML=dNotes().map(id=>`<button data-id="${id}" ${D.ncur?"":"disabled"}>${nameId(id)}</button>`).join("");
+  $("dbars").innerHTML=D.bars>1?`<span>${t().playBar}</span>`+Array.from({length:D.bars},(_,k)=>`<button data-bar="${k}">▶ ${k+1}</button>`).join(""):"";
+  const has=D.slots.some(x=>x&&x!=="-");$("dmine").disabled=!has;$("dclear").disabled=!has;$("ddel").disabled=!has;
+  $("dsc").textContent=S.sc.dit.s+"/"+S.sc.dit.t;$("dsk").textContent=S.sc.dit.k}
+function newD(){stopAll();D.tR=genBars(dPool(),DMT().b,D.bars);D.tS=slotsOf(D.tR,dTot());D.tP=genPitches(noteKeys(D.tS));
+  D.slots=Array(dTot()).fill(null);D.pit={};D.cur=0;D.ncur=null;D.checked=false;D.counted=false;D.ghost=null;
+  $("dfb").textContent="";$("dshow").hidden=true;$("dsolbox").hidden=true;$("dstatus").textContent=dHint();renderD()}
+function dEdited(){if(D.checked){D.checked=false;$("dfb").textContent="";$("dshow").hidden=true}renderD()}
+function seqFrom(sl,pit,from=0,to=sl.length){const out=[];for(let i=from;i<to;i++){const id=sl[i];
+  if(id===null)out.push({id:DMT().c?"dqr":"qr",ps:[]});else if(id!=="-")out.push({id,ps:CL(id).ev.map((e,k)=>pit[i+":"+k]||null)})}return out}
+function dPlay(seq,withRef){
+  const c=ac(),b=60/D.bpm,beats=DMT().b,ci=beats>=3?beats:beats*2,nodes=[];let t0=c.currentTime+.12;
+  if(withRef){nodes.push(...tone(t0,b*1.5,freq(midiId(degId(DK(),"1")))));t0+=b*2.5}
+  for(let i=0;i<ci;i++)nodes.push(...click(t0+i*b,i%beats===0?1:.6));
+  const start=t0+ci*b;let tt=0;
+  seq.forEach(({id,ps})=>CL(id).ev.forEach((e,k)=>{const d=e[0]*b;
+    if(!e[1])nodes.push(...(ps[k]?tone(start+tt*b,Math.max(.05,d-Math.min(.06,d*.3)),freq(midiId(ps[k]))):click(start+tt*b,.5)));tt+=e[0]}));
+  run(nodes,start+tt*b,now=>{if(now>=t0&&now<start)$("dstatus").textContent=Array.from({length:Math.min(ci,Math.floor((now-t0)/b)+1)},(_,i)=>i%beats+1).join("  ")},
+    ()=>{$("dstatus").textContent=dHint()})}
+function dSetPitch(key,id){if(!key||!dNotes().includes(id))return;D.pit[key]=id;
+  const ks=dKeysOrder(),i=ks.indexOf(key);D.ncur=ks.slice(i+1).find(k=>!D.pit[k])||ks.find(k=>!D.pit[k])||ks[Math.min(i+1,ks.length-1)];dEdited()}
+function dPick(st){const kd=DK(),al=dNotes(),base=nid(st,kd.sig[li7(st)]||0);if(al.includes(base))return base;return al.find(id=>pst(id)===st)||base}
+function dHit(e){const svg=$("dstaff"),p=svgPt(svg,e),r=Math.floor(p.y/DRH),L=D.lay;if(!L)return null;
+  let best=null;L.notes.forEach(n=>{if(n.r!==r)return;const dx=Math.abs(n.x-p.x);if(dx<L.pw*.45&&(!best||dx<best.dx))best={key:n.key,dx}});
+  if(!best)return null;const al=dNotes(),lo=Math.min(...al.map(pst))-1,hi=Math.max(...al.map(pst))+1;
+  const st=Math.max(lo,Math.min(hi,Math.round((r*DRH+100-p.y)/5)+2));return{key:best.key,id:dPick(st)}}
+(()=>{const svg=$("dstaff");let down=false;
+  const setG=g=>{const a=D.ghost,same=a===g||(a&&g&&a.key===g.key&&a.id===g.id);if(!same){D.ghost=g;dSvg(svg,D.slots,D.pit,{cur:D.cur,ncur:D.ncur,ghost:g,marks:D.checked,store:true})}};
+  svg.addEventListener("pointerdown",e=>{const em=e.target.closest("[data-e]");if(em){D.cur=+em.dataset.e;renderD();return}
+    e.preventDefault();down=true;svg.setPointerCapture(e.pointerId);const h=dHit(e);if(h){D.ncur=h.key;setG(h)}});
+  svg.addEventListener("pointermove",e=>{if(down||e.pointerType==="mouse"){const h=dHit(e);setG(h)}});
+  svg.addEventListener("pointerup",e=>{if(!down)return;down=false;const g=D.ghost;D.ghost=null;if(g)dSetPitch(g.key,g.id);else renderD()});
+  svg.addEventListener("pointercancel",()=>{down=false;setG(null)});
+  svg.addEventListener("pointerleave",()=>{if(!down)setG(null)});
+})();
+$("dpal").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const id=b.dataset.id,i=D.cur;
+  D.slots[i]=id;for(let k=1;k<CL(id).p;k++)D.slots[i+k]="-";D.cur=dNextEmpty(i+CL(id).p);
+  if(!D.ncur||D.pit[D.ncur])D.ncur=dKeysOrder().find(k=>!D.pit[k])||null;dEdited()};
+$("dkeys").onclick=e=>{const b=e.target.closest("button");if(b&&!b.disabled)dSetPitch(D.ncur,b.dataset.id)};
+$("dprev").onclick=()=>{const ks=dKeysOrder(),i=ks.indexOf(D.ncur);if(i>0){D.ncur=ks[i-1];renderD()}};
+$("dnext").onclick=()=>{const ks=dKeysOrder(),i=ks.indexOf(D.ncur);if(i<ks.length-1){D.ncur=ks[i+1];renderD()}};
+$("ddel").onclick=()=>{let i=D.ncur?+D.ncur.split(":")[0]:-1;if(i<0){for(let k=D.slots.length-1;k>=0;k--)if(D.slots[k]&&D.slots[k]!=="-"){i=k;break}}
+  if(i<0)return;const p=CL(D.slots[i]).p;for(let k=0;k<p;k++)D.slots[i+k]=null;Object.keys(D.pit).forEach(k=>{if(+k.split(":")[0]===i)delete D.pit[k]});D.cur=i;D.ncur=null;dEdited()};
+$("dclear").onclick=()=>{D.slots=Array(dTot()).fill(null);D.pit={};D.cur=0;D.ncur=null;dEdited()};
+$("dplay").onclick=()=>dPlay(seqFrom(D.tS,D.tP),true);
+$("dmine").onclick=()=>dPlay(seqFrom(D.slots,D.pit),true);
+$("dbars").onclick=e=>{const x=e.target.closest("[data-bar]");if(!x)return;const k=+x.dataset.bar,b=DMT().b;dPlay(seqFrom(D.tS,D.tP,k*b,(k+1)*b),false)};
+$("dnew").onclick=newD;
+$("dcheck").onclick=()=>{
+  const tk=noteKeys(D.tS),cells=D.tS.filter(x=>x&&x!=="-").length;
+  let ca=0;D.tS.forEach((x,i)=>{if(x&&x!=="-"&&D.slots[i]===x)ca++});
+  const na=tk.filter(k=>{const i=+k.split(":")[0];return D.slots[i]===D.tS[i]&&D.pit[k]===D.tP[k]}).length;
+  const ok=ca===cells&&na===tk.length&&D.slots.every((x,i)=>x===D.tS[i]);D.checked=true;
+  if(!D.counted){D.counted=true;scoreUp("dit",ok)}
+  $("dfb").textContent=ok?t().ok:fmt(t().dRes,{a:ca,b:cells,c:na,d:tk.length});$("dfb").className="fb"+(ok?" ok":"");$("dshow").hidden=ok;renderD()};
+$("dshow").onclick=()=>{$("dsolbox").hidden=false;dSvg($("dsol"),D.tS,D.tP,{})};
+{let rt=0;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!$("secD").hidden){renderD();if(!$("dsolbox").hidden)dSvg($("dsol"),D.tS,D.tP,{})}},150)})}
+$("dKey").innerHTML=KEYORDER.map(k=>`<option value="${k}">${KEYDEFS[k].n}</option>`).join("");
+$("dKey").onchange=e=>{D.key=e.target.value;store.set("dKey",D.key);newD()};
+$("dLv").oninput=e=>{D.lv=+e.target.value;store.set("dLv",D.lv);newD()};
+$("dN").oninput=e=>{D.n=+e.target.value;store.set("dN",D.n);newD()};
+$("dM").onclick=e=>{const b=e.target.closest("button");if(!b)return;D.meter=b.dataset.v;store.set("dM",D.meter);newD()};
+$("dBars").onclick=e=>{const b=e.target.closest("button");if(!b)return;D.bars=+b.dataset.v;store.set("dBars",D.bars);newD()};
+$("dbpm").oninput=e=>{D.bpm=+e.target.value;$("dbpmOut").textContent=D.bpm;store.set("dBpm",D.bpm)};
+
 /* ================= XERAL ================= */
 function applyLang(){
   document.documentElement.lang=S.lang;
@@ -1202,8 +1420,8 @@ function applyLang(){
   if(M.checked){const n=total(),g=M.target.filter((m,i)=>M.user[i]===m).length;$("mfb").textContent=g===n?t().ok:fmt(t().partial,{a:g,b:n})}
 }
 function setSec(s,keep){stopAll();if(!keep&&P.active!==null)exitPath(true);S.sec=s;store.set("sec",s);segSetTabs();
-  ["p","r","m","a"].forEach(x=>$("sec"+x.toUpperCase()).hidden=s!==x);
-  if(s==="p"){renderPath();fillProfile();renderRank()}if(s==="a")renderAdmin()}
+  ["p","r","m","d","a"].forEach(x=>$("sec"+x.toUpperCase()).hidden=s!==x);
+  if(s==="p"){renderPath();fillProfile();renderRank()}if(s==="a")renderAdmin();if(s==="d")renderD()}
 function segSetTabs(){document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.sec===S.sec)))}
 $("tabs").onclick=e=>{const b=e.target.closest("button");if(b)setSec(b.dataset.sec)};
 $("langCur").onclick=e=>{e.stopPropagation();$("lang").classList.toggle("open")};
@@ -1229,9 +1447,11 @@ if(!(M.level>=1&&M.level<=8))M.level=1;$("mlv").value=M.level;buildKeys();
 setMMode(["live","err"].includes(M.mode)?M.mode:"mem");
 {const al0=applyLang;applyLang=function(){al0();if(!$("ridBox").hidden)renderId();if(!$("rbBox").hidden){renderB();if(!B.checked)$("bstatus").textContent=bHintNow()}if(!$("secP").hidden)renderPath();if(!$("secA").hidden)renderAdmin();if(!$("secP").hidden)renderRank();pathBar()}}
 checkAdminHash();loadServerCfg();
+newD();
+{const al1=applyLang;applyLang=function(){al1();if(!$("secD").hidden)renderD();if($("dstatus").textContent)$("dstatus").textContent=dHint()}}
 $("timbre").value=S.timbre;$("timbre").onchange=e=>{S.timbre=e.target.value;store.set("timbre",S.timbre);tone(ac().currentTime+.03,.5,523.25)};
 S.rmode=store.get("rmode","pre");setRMode(["id","build","err"].includes(S.rmode)?S.rmode:"pre");
-setSec(["p","r","m"].includes(S.sec)?S.sec:"r");if(location.hash==="#admin")setSec("a");
+setSec(["p","r","m","d"].includes(S.sec)?S.sec:"r");if(location.hash==="#admin")setSec("a");
 applyLang();
 </script>
 </body>
